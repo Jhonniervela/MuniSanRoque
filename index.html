@@ -17,14 +17,31 @@
         .tag-tupa { background: #dbeafe; color: #1e40af; font-size: 8px; font-weight: 900; }
         .tag-tusne { background: #fef3c7; color: #92400e; font-size: 8px; font-weight: 900; }
         .sub-office-border { border-left: 3px solid #e2e8f0; }
+        
+        /* Estilos del Modal */
+        #modalRequisitos { display: none; }
+        #modalRequisitos.active { display: flex; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 leading-tight">
 
+    <div id="modalRequisitos" class="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-blue-600"></div>
+            <h3 id="modalTitulo" class="font-black text-blue-900 uppercase italic text-lg mb-4 leading-tight">Requisitos</h3>
+            <div id="modalCuerpo" class="text-slate-600 text-sm italic mb-8 space-y-2">
+                </div>
+            <button onclick="closeModal()" class="w-full bg-slate-100 text-slate-800 font-black py-4 rounded-2xl uppercase text-[10px] tracking-widest hover:bg-slate-200 transition">
+                Entendido
+            </button>
+        </div>
+    </div>
+
     <header class="bg-blue-900 text-white pt-12 pb-24 px-6 text-center shadow-2xl relative">
         <div class="max-w-xl mx-auto">
-            <h1 class="text-3xl font-black uppercase italic tracking-tighter">Municipalidad Distrital</h1>
-            <p class="text-blue-300 text-[10px] font-bold uppercase tracking-[0.3em] mt-2 italic">Gobierno Digital 2026</p>
+            <h1 class="text-3xl font-black uppercase italic tracking-tighter leading-none">Municipalidad Distrital</h1>
+            <p class="text-blue-300 text-[10px] font-bold uppercase tracking-[0.3em] mt-3 italic">Gobierno Digital 2026</p>
         </div>
         <div class="absolute bottom-0 left-0 w-full h-12 bg-slate-50 rounded-t-[3rem]"></div>
     </header>
@@ -48,27 +65,17 @@
 
         <section id="view-inicio" class="view-section active">
             <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 mb-6 text-center">
-                <h2 class="text-2xl font-black text-blue-900 uppercase italic">¡Bienvenido!</h2>
-                <p class="text-[11px] text-slate-500 mt-2 italic">Tu municipalidad más cerca de ti, sin colas y con transparencia.</p>
-                <div class="grid grid-cols-2 gap-4 mt-8">
-                    <div class="bg-blue-50 p-4 rounded-3xl">
-                        <i class="fa-solid fa-bullseye text-blue-600 mb-2"></i>
-                        <span class="block text-[10px] font-black uppercase italic text-blue-900">Misión</span>
-                        <p class="text-[9px] text-slate-400 mt-1 italic">Servir con eficiencia.</p>
+                <h2 class="text-2xl font-black text-blue-900 uppercase italic leading-none mb-4">Sandro Mori Rengifo</h2>
+                <p class="text-[10px] text-blue-600 font-bold uppercase tracking-widest mb-6 italic">Alcalde Distrital 2023-2026</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-3xl border border-blue-100">
+                        <span class="block text-[10px] font-black uppercase text-blue-900">Misión</span>
+                        <p class="text-[9px] text-slate-500 mt-1 italic leading-tight">Servir con transparencia y eficiencia a todos.</p>
                     </div>
-                    <div class="bg-amber-50 p-4 rounded-3xl">
-                        <i class="fa-solid fa-eye text-amber-600 mb-2"></i>
-                        <span class="block text-[10px] font-black uppercase italic text-amber-900">Visión</span>
-                        <p class="text-[9px] text-slate-400 mt-1 italic">Distrito moderno.</p>
+                    <div class="bg-amber-50 p-4 rounded-3xl border border-amber-100">
+                        <span class="block text-[10px] font-black uppercase text-amber-900">Visión</span>
+                        <p class="text-[9px] text-slate-500 mt-1 italic leading-tight">Distrito moderno, seguro y digital.</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="bg-blue-900 rounded-[2.5rem] p-6 text-white shadow-lg flex items-center mb-6">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="w-14 h-14 rounded-full border-2 border-white/20 mr-4">
-                <div>
-                    <h3 class="font-black italic uppercase text-sm leading-none">Nombre del Alcalde</h3>
-                    <p class="text-[9px] text-blue-300 font-bold uppercase tracking-widest mt-2">Alcalde Distrital</p>
                 </div>
             </div>
 
@@ -77,9 +84,9 @@
         </section>
 
         <section id="view-pagos" class="view-section">
-            <div class="mb-6">
-                <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Buscar trámite, costo o requisito..." 
-                class="w-full p-5 rounded-2xl shadow-inner bg-white border-2 border-blue-50 focus:border-blue-500 outline-none font-medium">
+            <div class="mb-6 px-1">
+                <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Buscar trámite o costo..." 
+                class="w-full p-5 rounded-2xl shadow-inner bg-white border-2 border-blue-50 focus:border-blue-600 outline-none font-medium transition-all">
             </div>
             <div id="listaTasas" class="space-y-3"></div>
         </section>
@@ -93,63 +100,56 @@
                 <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
                     <i class="fa-solid fa-bullhorn"></i>
                 </div>
-                <h4 class="font-black text-slate-800 uppercase italic text-lg">Alerta Vecinal</h4>
-                <p class="text-[11px] text-slate-400 mt-4 mb-8 italic">Envía fotos de baches, basura o parques en mal estado directamente a nuestra central de atención.</p>
-                <a href="https://wa.me/51900000000?text=Hola, reporto una incidencia..." 
+                <h4 class="font-black text-slate-800 uppercase italic text-lg">Reporte Vecinal</h4>
+                <p class="text-[11px] text-slate-400 mt-4 mb-8 italic">¿Viste un problema? Reporta baches o limpieza enviando fotos por WhatsApp.</p>
+                <a href="https://wa.me/51969356686?text=Hola, reporto una incidencia..." 
                 class="block bg-red-600 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-red-100 active:scale-95 transition">
-                    Enviar Reporte vía WhatsApp
+                    Enviar Reporte Ahora
                 </a>
             </div>
         </section>
 
     </main>
 
-    <footer class="text-center pb-12">
-        <p class="text-[10px] font-bold text-slate-300 uppercase tracking-[0.3em]">© 2026 Municipalidad Distrital</p>
-    </footer>
-
     <script>
-        // --- 1. DATOS DE TASAS (TUPA/TUSNE) ---
+        // --- 1. DATOS DE TASAS ---
         const tasas = [
-            { tipo: "TUPA", n: "Impuesto Predial (DD.JJ.)", p: "S/. 10.00", r: "DNI, Minuta o Escritura, Autovalúo." },
-            { tipo: "TUPA", n: "Matrimonio Civil", p: "S/. 250.00", r: "Partidas, DNI de ambos, Certificado médico." },
-            { tipo: "TUSNE", n: "Duplicado de Recibo", p: "S/. 2.50", r: "Nombre de titular o código de usuario." },
-            { tipo: "TUSNE", n: "Alquiler de Local (Hora)", p: "S/. 30.00", r: "Solicitud simple y garantía." },
-            { tipo: "TUPA", n: "Licencia de Funcionamiento", p: "S/. 120.00", r: "RUC, Declaración ITSE, DNI." }
+            { tipo: "TUPA", n: "Impuesto Predial (DD.JJ.)", p: "S/. 10.00", r: "• DNI del titular.<br>• Minuta o Escritura Pública.<br>• Recibo de Autovalúo." },
+            { tipo: "TUPA", n: "Matrimonio Civil", p: "S/. 250.00", r: "• Partidas de nacimiento.<br>• Copia de DNI de ambos.<br>• Certificado médico de salud." },
+            { tipo: "TUSNE", n: "Duplicado de Recibo", p: "S/. 2.50", r: "• Indicar nombre del titular.<br>• Código de usuario o predio." },
+            { tipo: "TUSNE", n: "Alquiler de Local (Hora)", p: "S/. 30.00", r: "• Solicitud dirigida al alcalde.<br>• Firma de compromiso de cuidado.<br>• Depósito de garantía." }
         ];
 
-        // --- 2. DATOS DE OFICINAS Y SUB-ÁREAS ---
+        // --- 2. DATOS DE OFICINAS ---
         const oficinas = [
             {
                 nombre: "Gerencia de Desarrollo Social",
-                gerente: "Nombre del Gerente Social",
+                gerente: "Responsable General",
                 color: "blue-600",
                 subs: [
                     { n: "ULE (SISFOH)", e: "Responsable SISFOH", tel: "51900000001", d: "Clasificación socioeconómica." },
-                    { n: "Vaso de Leche", e: "Responsable PVL", tel: "51900000002", d: "Programas alimentarios." },
+                    { n: "Vaso de Leche", e: "Responsable PVL", tel: "51900000002", d: "Apoyo alimentario." },
                     { n: "OMAPED", e: "Responsable OMAPED", tel: "51900000003", d: "Atención a personas con discapacidad." },
-                    { n: "DEMUNA", e: "Responsable DEMUNA", tel: "51900000004", d: "Protección al menor." }
+                    { n: "DEMUNA", e: "Responsable DEMUNA", tel: "51900000004", d: "Defensa del niño y adolescente." }
                 ]
             },
             {
                 nombre: "Rentas y Recaudación",
-                gerente: "Nombre del Gerente Rentas",
+                gerente: "Brayan Vela",
                 color: "emerald-600",
                 subs: [
-                    { n: "Caja y Cobranza", e: "Responsable de Caja", tel: "51900000005", d: "Pagos de tasas y multas." },
-                    { n: "Fiscalización", e: "Responsable Fiscalizador", tel: "51900000006", d: "Control de establecimientos." }
+                    { n: "Caja y Cobranza", e: "Brayan Vela", tel: "51969356686", d: "Cobro de tasas, arbitrios e impuestos." },
+                    { n: "Fiscalización", e: "Responsable Fiscalizador", tel: "51900000006", d: "Control y orden municipal." }
                 ]
             }
         ];
 
-        // --- 3. DATOS DE AGENDA ---
         const agenda = [
-            { d: "21", m: "FEB", t: "Campaña Médica", c: "bg-blue-600" },
+            { d: "21", m: "FEB", t: "Campaña Médica Gratuita", c: "bg-blue-600" },
             { d: "28", m: "FEB", t: "Amnistía de Arbitrios", c: "bg-red-600" }
         ];
 
         function init() {
-            // Render Agenda
             document.getElementById('listaAgenda').innerHTML = agenda.map(e => `
                 <div class="bg-white p-3 rounded-2xl flex items-center shadow-sm border border-slate-50">
                     <div class="${e.c} text-white w-10 h-10 rounded-xl flex flex-col items-center justify-center font-black">
@@ -160,8 +160,7 @@
                 </div>
             `).join('');
 
-            // Render Tasas
-            document.getElementById('listaTasas').innerHTML = tasas.map(t => `
+            document.getElementById('listaTasas').innerHTML = tasas.map((t, index) => `
                 <div class="bg-white p-5 rounded-3xl shadow-sm border border-slate-50 flex justify-between items-center item-search">
                     <div class="flex-1 pr-4">
                         <div class="flex items-center gap-2 mb-1">
@@ -170,18 +169,17 @@
                         </div>
                         <span class="text-blue-600 font-black text-[11px]">${t.p}</span>
                     </div>
-                    <button onclick="alert('REQUISITOS:\\n- ${t.r}')" class="bg-blue-50 text-blue-600 p-3 rounded-2xl text-[9px] font-black uppercase italic">Ver Info</button>
+                    <button onclick="openModal('${t.n}', '${t.r}')" class="bg-blue-50 text-blue-600 p-3 rounded-2xl text-[9px] font-black uppercase italic active:scale-90 transition">Info</button>
                 </div>
             `).join('');
 
-            // Render Oficinas
             document.getElementById('listaOficinas').innerHTML = oficinas.map(o => `
                 <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100">
                     <div class="flex items-center mb-4">
                         <div class="w-1 h-6 bg-${o.color} rounded-full mr-3"></div>
                         <h4 class="font-black text-sm uppercase italic text-slate-800">${o.nombre}</h4>
                     </div>
-                    <p class="text-[9px] font-bold text-slate-400 mb-6 px-4">Gerente: ${o.gerente}</p>
+                    <p class="text-[9px] font-bold text-slate-400 mb-6 px-4 italic">Gerente: ${o.gerente}</p>
                     <div class="grid gap-3">
                         ${o.subs.map(s => `
                             <div class="sub-office-border bg-slate-50 p-4 rounded-r-2xl flex justify-between items-center">
@@ -190,12 +188,23 @@
                                     <p class="text-[8px] font-bold text-slate-400 mt-0.5 italic">Encargado: ${s.e}</p>
                                     <p class="text-[9px] text-slate-500 mt-2 leading-tight">${s.d}</p>
                                 </div>
-                                <a href="https://wa.me/${s.tel}" class="text-green-600 text-xl"><i class="fa-brands fa-whatsapp"></i></a>
+                                <a href="https://wa.me/${s.tel}?text=Hola, tengo una consulta para el área de ${s.n}" class="text-green-600 text-xl active:scale-90 transition"><i class="fa-brands fa-whatsapp"></i></a>
                             </div>
                         `).join('')}
                     </div>
                 </div>
             `).join('');
+        }
+
+        // FUNCIONES DEL MODAL
+        function openModal(titulo, requisitos) {
+            document.getElementById('modalTitulo').innerText = titulo;
+            document.getElementById('modalCuerpo').innerHTML = requisitos;
+            document.getElementById('modalRequisitos').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalRequisitos').classList.remove('active');
         }
 
         function switchTab(tab) {
