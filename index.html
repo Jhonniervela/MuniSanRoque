@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Municipal - San Roque de Cumbaza</title>
+    <link rel="icon" type="image/png" href="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
@@ -13,162 +14,163 @@
         .bg-institucional { background-color: var(--color-institucional); }
         .text-institucional { color: var(--color-institucional); }
         .tab-btn.active { color: var(--color-institucional); border-bottom: 4px solid var(--color-institucional); font-weight: 900; }
-        
         .view-section { display: none; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .view-section.active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .event-card { background: white; transition: all 0.3s ease; cursor: pointer; }
-        .event-card:active { transform: scale(0.96); }
-        
-        .modal-container { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+        /* MODAL CENTRADO */
+        .modal-container { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; }
         .modal-container.active { display: flex; }
-        
-        #loading-screen { position: fixed; inset: 0; z-index: 9999; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .loader-circle { width: 60px; height: 60px; border: 4px solid #f3f3f3; border-top: 4px solid var(--color-institucional); border-radius: 50%; animation: spin 1s linear infinite; }
+        .modal-content { background: white; width: 100%; max-width: 420px; border-radius: 3rem; padding: 2.5rem; transform: scale(0.9); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .modal-container.active .modal-content { transform: scale(1); }
+
+        /* LOADER */
+        #loading-screen { position: fixed; inset: 0; z-index: 10000; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .loader-circle { width: 80px; height: 80px; border: 4px solid #f3f3f3; border-top: 4px solid var(--color-institucional); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .fade-out { opacity: 0; visibility: hidden; transition: 0.5s; }
-
-        .card-tupa { border-left: 5px solid #00A350; background: #f0faf4; }
-        .card-tusne { border-left: 5px solid #f59e0b; background: #fffcf0; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-900 text-center">
 
     <div id="loading-screen">
-        <div class="loader-circle"></div>
-        <p class="mt-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Cargando San Roque Digital...</p>
+        <div class="relative flex items-center justify-center">
+            <div class="loader-circle"></div>
+            <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="absolute w-12 h-12 object-contain">
+        </div>
+        <p class="mt-4 text-[11px] font-black uppercase tracking-widest text-slate-400">San Roque Digital</p>
     </div>
 
-    <header class="bg-institucional text-white pt-10 pb-32 px-6 text-center relative overflow-hidden">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-20 w-auto mx-auto mb-4 drop-shadow-lg bg-white p-2 rounded-full">
+    <header class="bg-institucional text-white pt-10 pb-32 px-6 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
+            <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-20 w-auto mb-4 drop-shadow-lg bg-white p-2 rounded-full">
             <h1 class="text-3xl md:text-5xl font-black uppercase italic tracking-tighter leading-none mb-1">Municipalidad Distrital</h1>
-            <p class="text-green-100 text-[11px] md:text-sm font-bold uppercase tracking-[0.4em] italic text-center">San Roque de Cumbaza</p>
+            <p class="text-green-100 text-[11px] md:text-sm font-bold uppercase tracking-[0.4em] italic">San Roque de Cumbaza</p>
         </div>
         <div class="absolute bottom-0 left-0 w-full h-12 bg-slate-50 rounded-t-[3rem]"></div>
     </header>
 
     <main class="container mx-auto px-4 -mt-20 pb-10 max-w-4xl relative z-20">
-        
         <nav class="bg-white/95 shadow-2xl rounded-3xl flex mb-8 sticky top-4 z-50 border border-white overflow-hidden max-w-xl mx-auto">
-            <button onclick="switchTab('inicio')" id="btn-inicio" class="tab-btn active flex-1 py-5 px-3 text-[9px] uppercase font-black">
-                <i class="fa-solid fa-house-chimney block text-xl mb-1"></i>Inicio
-            </button>
-            <button onclick="switchTab('pagos')" id="btn-pagos" class="tab-btn flex-1 py-5 px-3 text-[9px] uppercase font-black text-slate-400">
-                <i class="fa-solid fa-file-invoice-dollar block text-xl mb-1"></i>Tasas
-            </button>
+            <button onclick="switchTab('inicio')" id="btn-inicio" class="tab-btn active flex-1 py-5 px-3 text-[9px] uppercase font-black"><i class="fa-solid fa-house block text-xl mb-1"></i>Inicio</button>
+            <button onclick="switchTab('pagos')" id="btn-pagos" class="tab-btn flex-1 py-5 px-3 text-[9px] uppercase font-black text-slate-400"><i class="fa-solid fa-file-invoice-dollar block text-xl mb-1"></i>Tasas</button>
             <button onclick="switchTab('oficinas')" id="btn-oficinas" class="tab-btn flex-1 py-5 px-3 text-[9px] uppercase font-black text-slate-400">
-                <i class="fa-solid fa-address-book block text-xl mb-1"></i>Oficinas
+                <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-6 mx-auto mb-1 block">
+                Oficinas
             </button>
-            <button onclick="switchTab('ayuda')" id="btn-ayuda" class="tab-btn flex-1 py-5 px-3 text-[9px] uppercase font-black text-slate-400">
-                <i class="fa-solid fa-camera block text-xl mb-1"></i>Reporte
-            </button>
+            <button onclick="switchTab('ayuda')" id="btn-ayuda" class="tab-btn flex-1 py-5 px-3 text-[9px] uppercase font-black text-slate-400"><i class="fa-solid fa-camera block text-xl mb-1"></i>Reporte</button>
         </nav>
 
         <section id="view-inicio" class="view-section active">
             <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div class="bg-white rounded-[2.5rem] p-8 shadow-xl border border-white">
-                    <h2 class="text-2xl md:text-3xl font-black text-slate-800 uppercase italic leading-tight">
-                        ¡Bienvenido, <span class="text-institucional">Vecino!</span>
-                    </h2>
-                    <p class="text-slate-500 text-sm mt-2 italic font-medium">Estamos a tu servicio.</p>
-                    <div class="mt-6 pt-6 border-t border-slate-100 text-left">
+                <div class="bg-white rounded-[2.5rem] p-8 shadow-xl border border-white text-left">
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-800 uppercase italic leading-tight">¡Bienvenido, <span class="text-institucional">Vecino San Roquino!</span></h2>
+                    <div class="mt-6 pt-6 border-t border-slate-100 italic">
                         <p id="txt-fecha" class="text-xs font-black uppercase text-institucional tracking-widest"></p>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase">San Roque de Cumbaza - San Martín</p>
                     </div>
                 </div>
-
-                <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-[2.5rem] p-8 text-white shadow-lg flex flex-col justify-between">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-[9px] font-black uppercase opacity-60 tracking-widest text-left">Hora Oficial</p>
-                            <p id="txt-hora" class="text-4xl font-black italic tracking-tighter">00:00:00</p>
-                        </div>
-                        <div class="bg-white/10 p-3 rounded-2xl"><i class="fa-solid fa-clock text-2xl text-green-400"></i></div>
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-[2.5rem] p-8 text-white shadow-lg flex flex-col justify-between text-left">
+                    <div>
+                        <p class="text-[9px] font-black uppercase opacity-60 tracking-widest">Hora Oficial</p>
+                        <p id="txt-hora" class="text-4xl font-black italic tracking-tighter">00:00:00</p>
                     </div>
-                    <div class="mt-6 flex items-center gap-3 bg-white/5 p-4 rounded-2xl text-left">
+                    <div class="mt-4 flex items-center gap-3 bg-white/5 p-3 rounded-2xl w-fit">
                         <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
-                        <p class="text-[10px] font-bold uppercase tracking-widest">Atención: 07:30 AM - 03:30 PM</p>
+                        <p class="text-[10px] font-bold uppercase tracking-widest leading-none">ATENCION: 7:30 AM - 3:30 PM</p>
                     </div>
                 </div>
             </div>
-
-            <h3 class="text-lg font-black text-slate-800 uppercase italic mb-5 px-2 text-left">Actividades del Mes</h3>
+            <h3 class="text-lg font-black text-slate-800 uppercase italic mb-5 px-2 text-left underline decoration-green-500 underline-offset-8">Actividades del Mes</h3>
             <div id="listaAgenda" class="grid md:grid-cols-2 gap-4"></div>
         </section>
 
-        <section id="view-pagos" class="view-section">
+        <section id="view-pagos" class="view-section text-left">
             <div class="mb-4 max-w-xl mx-auto"><input type="text" id="searchInput" onkeyup="filterData()" placeholder="Buscar trámite..." class="w-full p-5 rounded-2xl shadow-inner bg-white border-2 border-green-50 outline-none font-bold"></div>
             <div id="listaTasas" class="grid md:grid-cols-2 gap-3"></div>
         </section>
 
-        <section id="view-oficinas" class="view-section">
-            <div id="listaOficinas" class="grid md:grid-cols-2 gap-6"></div>
+        <section id="view-oficinas" class="view-section text-left">
+            <div class="flex items-center justify-center gap-4 mb-8 bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100">
+                <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-12 w-12 object-contain">
+                <h2 class="text-2xl font-black text-slate-800 uppercase italic tracking-tighter">Directorio de Oficinas</h2>
+            </div>
+            <div id="listaOficinas" class="grid grid-cols-1 gap-6"></div>
         </section>
 
         <section id="view-ayuda" class="view-section">
-            <div class="bg-white p-8 rounded-[3rem] shadow-sm border border-slate-100 text-center max-w-md mx-auto">
-                <h4 class="font-black text-slate-800 uppercase italic text-lg mb-8">Reporte Vecinal</h4>
-                <div id="preview-container" class="mb-6 hidden relative">
-                    <img id="img-preview" src="#" class="w-full h-48 object-cover rounded-[2rem] border-4 border-white shadow-md">
-                    <button onclick="removeImage()" class="absolute -top-3 -right-3 bg-red-600 text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <div class="bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 max-w-md mx-auto">
+                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fa-solid fa-bullhorn text-2xl"></i></div>
+                <h4 class="font-black text-slate-800 uppercase italic text-xl mb-4">Reporte Ciudadano</h4>
+                <div class="bg-slate-50 p-6 rounded-[2rem] text-left mb-8 border border-slate-100 italic text-[11px] text-slate-600 font-bold space-y-3">
+                    <p class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500"></i> Describe el problema y adjunta una foto.</p>
+                    <p class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500"></i> Pulsa el botón para abrir WhatsApp.</p>
                 </div>
-                <div id="upload-box">
-                    <input type="file" id="file-input" accept="image/*" class="hidden" onchange="previewFile()">
-                    <button onclick="document.getElementById('file-input').click()" class="w-full mb-3 bg-slate-100 text-slate-600 py-10 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-2 transition hover:bg-slate-200">
-                        <i class="fa-solid fa-camera text-4xl"></i>
-                        <span class="text-[10px] font-black uppercase tracking-widest">Capturar Evidencia</span>
-                    </button>
-                </div>
-                <a id="whatsapp-link" href="#" class="block w-full bg-red-600 text-white py-5 rounded-2xl font-black text-xs uppercase opacity-50 pointer-events-none shadow-lg">Enviar a Central</a>
+                <a href="https://wa.me/51969356686?text=Hola,%20adjunto%20mi%20evidencia%20para%20un%20reporte:" class="block w-full bg-[#25D366] text-white py-5 rounded-2xl font-black text-xs uppercase shadow-lg flex items-center justify-center gap-3 transition active:scale-95">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i> Enviar a WhatsApp
+                </a>
             </div>
         </section>
     </main>
 
     <footer class="bg-white pt-10 pb-20 px-8 border-t border-slate-100 text-center">
-        <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-10 mx-auto mb-4 grayscale opacity-60">
-        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 italic">San Roque de Cumbaza &copy; 2026</p>
+        <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-10 mx-auto mb-4 grayscale opacity-40">
+        <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300 italic">San Roque de Cumbaza &copy; 2026</p>
     </footer>
 
     <div id="modalInfo" class="modal-container" onclick="closeModal()">
-        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-8 relative shadow-2xl" onclick="event.stopPropagation()">
-            <h3 id="modalTitulo" class="font-black text-institucional uppercase italic text-lg mb-4 text-center"></h3>
-            <div id="modalCuerpo" class="text-slate-600 text-sm italic mb-8 border-t pt-4 space-y-2 text-left"></div>
+        <div class="modal-content text-center" onclick="event.stopPropagation()">
+            <div class="mb-6">
+                <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-16 mx-auto drop-shadow-sm">
+            </div>
+            <h3 id="modalTitulo" class="font-black text-slate-800 uppercase italic text-lg mb-4"></h3>
+            <div id="modalCuerpo" class="text-slate-500 text-sm italic mb-8 pt-4 border-t border-slate-50 text-left space-y-3"></div>
             <button onclick="closeModal()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black uppercase text-[10px]">Cerrar</button>
         </div>
     </div>
 
     <script>
-        // DATOS
         const agenda = [
-            { d: "24", m: "FEB", h: "09:00 AM", t: "Feria Gastronómica", l: "Plaza Central", i: "fa-utensils", color: "#f97316", dsc: "Gran exhibición de platos típicos sanroqueños." },
-            { d: "28", m: "FEB", h: "08:00 AM", t: "Campaña de Salud", l: "Frontis Municipal", i: "fa-stethoscope", color: "#3b82f6", dsc: "Atención médica gratuita para todos los vecinos." }
+            { d: "24", m: "FEB", h: "09:00 AM", t: "Feria Gastronómica", l: "Plaza Central", color: "#f97316", dsc: "Exhibición de platos típicos de la zona." },
+            { d: "28", m: "FEB", h: "08:00 AM", t: "Campaña de Salud", l: "Frontis Municipal", color: "#3b82f6", dsc: "Atención médica integral gratuita." }
         ];
 
         const tasas = [
-            { tipo: "TUPA", n: "Impuesto Predial", p: "S/. 10.00", r: "• DNI titular.<br>• Copia Literal." },
-            { tipo: "TUSNE", n: "Uso de Maquinaria", p: "S/. 120.00", r: "• Solicitud al Alcalde." }
+            { tipo: "TUPA", n: "Impuesto Predial", p: "S/. 10.00", r: "• DNI del titular.<br>• Copia Literal de la propiedad." },
+            { tipo: "TUSNE", n: "Uso de Maquinaria", p: "S/. 120.00", r: "• Solicitud dirigida al Alcalde." }
         ];
 
         const oficinas = [
-            { nombre: "Administración y Rentas", subs: [{ n: "Caja", e: "Sr. Brayan Vela", tel: "51969356686", d: "Pagos", msg: "Hola Brayan..." }] },
-            { nombre: "Desarrollo Social", subs: [{ n: "SISFOH", e: "Responsable", tel: "51900000001", d: "Clasificación", msg: "Deseo ver mi SISFOH." }] }
+            { 
+                nombre: "Gerencia y Secretaría", 
+                subs: [
+                    { n: "Secretaría General", e: "Mesa de Partes", tel: "51969356686", msg: "Consulta trámite." },
+                    { n: "Imagen Institucional", e: "Prensa y Eventos", tel: "51969356686", msg: "Consulta eventos." }
+                ]
+            },
+            { 
+                nombre: "Administración y Rentas", 
+                subs: [
+                    { n: "Caja", e: "Sr. Brayan Vela", tel: "51969356686", msg: "Consulta sobre pagos." },
+                    { n: "Contabilidad", e: "Gestión Financiera", tel: "51969356686", msg: "Asuntos contables." }
+                ]
+            },
+            { 
+                nombre: "Servicios a la Ciudad", 
+                subs: [
+                    { n: "Agua (ATM)", e: "Saneamiento", tel: "51969356686", msg: "Reporte de agua." },
+                    { n: "Limpieza Pública", e: "Gestión de Residuos", tel: "51969356686", msg: "Reporte de basura." }
+                ]
+            }
         ];
 
-        // RELOJ Y FECHA
         function actualizarReloj() {
             const ahora = new Date();
-            const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long' };
-            document.getElementById('txt-fecha').innerText = ahora.toLocaleDateString('es-ES', opcionesFecha);
-            const h = String(ahora.getHours()).padStart(2, '0');
-            const m = String(ahora.getMinutes()).padStart(2, '0');
-            const s = String(ahora.getSeconds()).padStart(2, '0');
-            document.getElementById('txt-hora').innerText = `${h}:${m}:${s}`;
+            const opciones = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('txt-fecha').innerText = ahora.toLocaleDateString('es-ES', opciones);
+            document.getElementById('txt-hora').innerText = ahora.toLocaleTimeString('es-ES', {hour12: false});
         }
         setInterval(actualizarReloj, 1000);
 
-        // NAVEGACIÓN
         function switchTab(tab) {
             document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -177,11 +179,9 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // RENDERIZADO
         function init() {
-            // Agenda
             document.getElementById('listaAgenda').innerHTML = agenda.map((e, idx) => `
-                <div onclick="openAgendaModal(${idx})" class="event-card p-5 rounded-3xl flex items-center shadow-md border border-slate-100" style="border-left: 6px solid ${e.color}">
+                <div onclick="openAgendaModal(${idx})" class="bg-white p-6 rounded-[2.5rem] flex items-center shadow-md border-l-8 cursor-pointer active:scale-95 transition" style="border-color: ${e.color}">
                     <div class="text-center pr-5 border-r min-w-[70px]">
                         <span class="block text-2xl font-black text-slate-800 leading-none">${e.d}</span>
                         <span class="block text-[10px] font-black uppercase" style="color: ${e.color}">${e.m}</span>
@@ -193,27 +193,28 @@
                 </div>
             `).join('');
 
-            // Tasas
             document.getElementById('listaTasas').innerHTML = tasas.map(t => `
-                <div class="p-5 rounded-3xl flex justify-between items-center shadow-sm ${t.tipo === 'TUPA' ? 'card-tupa' : 'card-tusne'} item-search">
-                    <div class="text-left">
+                <div class="p-6 rounded-[2.5rem] flex justify-between items-center shadow-sm bg-white border border-slate-100 item-search">
+                    <div>
                         <span class="px-2 py-0.5 rounded-full text-white text-[8px] font-black ${t.tipo === 'TUPA' ? 'bg-green-600' : 'bg-amber-500'}">${t.tipo}</span>
                         <h4 class="font-black text-[11px] uppercase mt-2 text-slate-800">${t.n}</h4>
-                        <span class="text-institucional font-black text-[12px]">${t.p}</span>
+                        <span class="text-institucional font-black text-[13px]">${t.p}</span>
                     </div>
-                    <button onclick="openTasaModal('${t.n}', '${t.r}')" class="bg-white text-slate-800 px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-sm border border-slate-100">Requisitos</button>
+                    <button onclick="openTasaModal('${t.n}', '${t.r}')" class="bg-slate-50 text-slate-800 px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-sm active:scale-90 transition">Requisitos</button>
                 </div>
             `).join('');
 
-            // Oficinas
             document.getElementById('listaOficinas').innerHTML = oficinas.map(o => `
-                <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100 text-left">
-                    <h4 class="font-black text-sm uppercase italic text-slate-800 mb-4">${o.nombre}</h4>
-                    <div class="grid gap-3">
+                <div class="bg-white p-6 rounded-[3rem] shadow-sm border border-slate-100 mb-2">
+                    <h4 class="font-black text-xs uppercase italic text-slate-800 mb-4 tracking-widest flex items-center gap-3">
+                        <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-6 w-6 object-contain">
+                        ${o.nombre}
+                    </h4>
+                    <div class="grid md:grid-cols-2 gap-3">
                         ${o.subs.map(s => `
-                            <div class="bg-slate-50 p-4 rounded-2xl flex justify-between items-center border-l-4 border-green-500">
-                                <div><h5 class="text-[10px] font-black text-green-900 uppercase">${s.n}</h5><p class="text-[9px] font-bold text-slate-600 mt-1 italic">${s.e}</p></div>
-                                <a href="https://wa.me/${s.tel}?text=${encodeURIComponent(s.msg)}" class="bg-white p-3 rounded-xl text-green-600 shadow-md"><i class="fa-brands fa-whatsapp text-2xl"></i></a>
+                            <div class="bg-slate-50 p-4 rounded-3xl flex justify-between items-center border border-slate-100">
+                                <div><h5 class="text-[10px] font-black text-slate-800 uppercase leading-none">${s.n}</h5><p class="text-[9px] font-bold text-slate-400 mt-1 italic">${s.e}</p></div>
+                                <a href="https://wa.me/${s.tel}?text=${encodeURIComponent(s.msg)}" class="bg-white p-3 rounded-2xl text-green-600 shadow-sm transition active:scale-125"><i class="fa-brands fa-whatsapp text-2xl"></i></a>
                             </div>
                         `).join('')}
                     </div>
@@ -221,47 +222,26 @@
             `).join('');
         }
 
-        // MODALES
         function openAgendaModal(idx) {
             const e = agenda[idx];
             document.getElementById('modalTitulo').innerText = e.t;
-            document.getElementById('modalCuerpo').innerHTML = `<p><b>Hora:</b> ${e.h}</p><p><b>Lugar:</b> ${e.l}</p><div class="bg-slate-50 p-4 rounded-2xl mt-2 italic">${e.dsc}</div>`;
+            document.getElementById('modalCuerpo').innerHTML = `<p><b>Hora:</b> ${e.h}</p><p><b>Lugar:</b> ${e.l}</p><div class="bg-slate-50 p-4 rounded-2xl mt-4 border-l-4 border-institucional">${e.dsc}</div>`;
             document.getElementById('modalInfo').classList.add('active');
         }
+
         function openTasaModal(t, r) {
             document.getElementById('modalTitulo').innerText = t;
-            document.getElementById('modalCuerpo').innerHTML = r;
+            document.getElementById('modalCuerpo').innerHTML = `<p class="text-[10px] font-black uppercase text-slate-400 mb-2">Requisitos:</p><div class="bg-slate-50 p-4 rounded-2xl">${r}</div>`;
             document.getElementById('modalInfo').classList.add('active');
         }
+
         function closeModal() { document.getElementById('modalInfo').classList.remove('active'); }
 
-        // BÚSQUEDA
         function filterData() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             document.querySelectorAll('.item-search').forEach(item => {
                 item.style.display = item.innerText.toLowerCase().includes(input) ? "flex" : "none";
             });
-        }
-
-        // REPORTE VECINAL
-        function previewFile() {
-            const preview = document.getElementById('img-preview');
-            const file = document.getElementById('file-input').files[0];
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                preview.src = reader.result;
-                document.getElementById('preview-container').classList.remove('hidden');
-                document.getElementById('upload-box').classList.add('hidden');
-                document.getElementById('whatsapp-link').classList.remove('opacity-50', 'pointer-events-none');
-                document.getElementById('whatsapp-link').href = `https://wa.me/51969356686?text=Hola,%20envío%20mi%20reporte%20vecinal.`;
-            }
-            if (file) reader.readAsDataURL(file);
-        }
-        function removeImage() {
-            document.getElementById('file-input').value = "";
-            document.getElementById('preview-container').classList.add('hidden');
-            document.getElementById('upload-box').classList.remove('hidden');
-            document.getElementById('whatsapp-link').classList.add('opacity-50', 'pointer-events-none');
         }
 
         window.onload = () => {
