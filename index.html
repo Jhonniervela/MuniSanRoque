@@ -173,22 +173,21 @@
         </div>
     </div>
 
-    <script>
+ <script>
         const agenda = [
             { d: "24", m: "FEB", h: "09:00 AM", t: "Feria Gastronómica", l: "Plaza Central", color: "#f97316", dsc: "Exhibición de platos típicos de la zona." },
             { d: "28", m: "FEB", h: "08:00 AM", t: "Campaña de Salud", l: "Frontis Municipal", color: "#3b82f6", dsc: "Atención médica integral gratuita." }
         ];
 
         const tasas = [
-            { tipo: "TUPA", n: "Liquidación de Autovaluo", p: "Monto Variable",  r: "<b>Caso A (Nuevo):</b> Escritura o Copia Literal + DNI.<br><b>Caso B (Anual):</b> DNI y Código de Contribuyente." },
-            { tipo: "TUPA", n: "Licencia de Funcionamiento", p: "Monto Variable",  r: "<b>Caso A (Área hasta 100 M2)- 100.00 s/:<b>Caso B (Área mas 100 M2 a 500 M2)- 180.00 s/:</b>• Solicitud dirigida a la oficina de rentas, cumpliendo con los requisitos que establece el artículo 113° de la ley N°27444.</b>• Fotocopia del DNI o carné de extranjería.</b>• Fotocopia del Comprobante de Información Registrada o Ficha RUC</b>• Fotocopia del Certificado Sanitario. </b>• Pago de tasa por licencia de apertura. </b>• inspección técnica de Seguridad en Defensa Civil Básica" },
+            { tipo: "TUPA", n: "Liquidación de Autovaluo", p: "Monto Variable",  r: "• Caso A (Nuevo): Escritura o Copia Literal + DNI.<br>• Caso B (Anual): DNI y Código de Contribuyente." },
+            { tipo: "TUPA", n: "Licencia de Funcionamiento", p: "Monto Variable",  r: "• Solicitud dirigida a la oficina de rentas.<br>• Fotocopia del DNI.<br>• Fotocopia de RUC.<br>• Certificado Sanitario.<br>• Inspección de Defensa Civil." },
             { tipo: "TUPA", n: "Constancia de No Adeudo", p: "S/. 10.00", r: "• Recibo de pago por derecho de trámite.<br>• Estar al día en el pago de Impuesto Predial y Arbitrios.<br>• Copia de DNI del titular." },
-             { tipo: "TUPA", n: "Deterioro de pistas y veredas", p: "S/. 10.00", r: "• Documento de notificación de liquidación de derecho municipal de obra.<br>• Pago por derecho de deterioro de pista y veredas.<br>• Por excavación para instalación de red agua y desague (metro lineal)." },
-             { tipo: "TUPA", n: "Expedicion de Constancia Negativa de Catastro", p: "S/. 30.00", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión de certificado.<br>• Fotocopia del DNI o carné de extrangeria del administrado." },
-             { tipo: "TUPA", n: "Expedición de constancia de posecion", p: "S/. 20.00", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión de certificado.<br>• Fotocopia del DNI o carné de extrangeria del administrado." },
-             { tipo: "TUPA", n: "Licencia de Construccion", p: "S/. 45.00", r: "• Formulario unico oficial debidamente llenado, rubricado por el propietario, el abogado y responsable de la obra.<br>• Hoja de trámite correspodiente.<br>• Pago de derecho de analisis y calificación del expediente.<br>• Fotocopia del DNI.<br>• Copia simple del certificado literal de dominio o título de propiedad.<br>• Certificado de habilitacion profesional, de los proyectistas y del responsable de obra. <br>• Certificado de parámetro urbanísticos y edificatorias vigentes. <br>• Planos de localización y ubicación. <br>• Planos de arquitectura. <br>• planos de instalaciones eléctricas. <br>• Fotografia a color. <br>• Memoria justificativa. <br>• Incluir autorizaciones de los sectores y/o entidades correspondientes, cuando las normas vigentes lo requieran. <br>• NOTA. En caso de estar vigente la aprobación de anteproyecto no requiere los numerales 7. 13. 14. y 15. " },
-  
-            { tipo: "TUSNE", n: "Alquiler de losa deportiva", p: "S/. --", r: "• Solicitud. <br>• Fotocopia Simple DNI. <br>• Recibo de pago por alquiler. <br>•A) Evento deportivos (por hora) - 8.00 s/.<br>•A) Eventos sociales-entrenamientos, culturales-bailables-otros(por dia) - 100.00 S/ " }
+            { tipo: "TUPA", n: "Deterioro de pistas y veredas", p: "S/. 10.00", r: "• Documento de notificación de liquidación.<br>• Pago por derecho de deterioro.<br>• Excavación para red de agua/desague." },
+            { tipo: "TUPA", n: "Expedicion de Constancia Negativa de Catastro", p: "S/. 30.00", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión.<br>• Fotocopia del DNI." },
+            { tipo: "TUPA", n: "Expedición de constancia de posecion", p: "S/. 20.00", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión.<br>• Fotocopia del DNI." },
+            { tipo: "TUPA", n: "Licencia de Construccion", p: "S/. 45.00", r: "• Formulario único oficial.<br>• Hoja de trámite.<br>• Pago de derecho de análisis.<br>• Copia literal o título de propiedad.<br>• Planos de arquitectura y ubicación." },
+            { tipo: "TUSNE", n: "Alquiler de losa deportiva", p: "S/. --", r: "• Solicitud.<br>• Fotocopia Simple DNI.<br>• Pago por hora (8.00 s/) o día (100.00 s/)." }
         ];
 
         const oficinas = [
@@ -252,7 +251,7 @@
                         <h4 class="font-black text-[11px] uppercase mt-2 text-slate-800">${t.n}</h4>
                         <span class="text-institucional font-black text-[13px]">${t.p}</span>
                     </div>
-                    <button onclick="openTasaModal('${t.n}', '${t.r}')" class="bg-slate-50 text-slate-800 px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-sm active:scale-90 transition">Requisitos</button>
+                    <button onclick="openTasaModal('${t.n}', '${t.r}')" class="bg-slate-50 text-slate-800 px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-sm active:scale-90 transition">Ver Info</button>
                 </div>
             `).join('');
 
@@ -281,10 +280,27 @@
             document.getElementById('modalInfo').classList.add('active');
         }
 
+        // FUNCIÓN ACTUALIZADA CON BOTÓN DE COMPARTIR
         function openTasaModal(t, r) {
             document.getElementById('modalTitulo').innerText = t;
-            document.getElementById('modalCuerpo').innerHTML = `<p class="text-[10px] font-black uppercase text-slate-400 mb-2">Requisitos:</p><div class="bg-slate-50 p-4 rounded-2xl">${r}</div>`;
+            
+            // Limpiar los requisitos para el mensaje de WhatsApp (quitar etiquetas <br>)
+            const requisitosTexto = r.replace(/<br>/g, '\n').replace(/<b>/g, '').replace(/<\/b>/g, '');
+            
+            document.getElementById('modalCuerpo').innerHTML = `
+                <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Requisitos:</p>
+                <div class="bg-slate-50 p-4 rounded-2xl mb-4">${r}</div>
+                
+                <button onclick="compartirPorWhatsApp('${t}', '${requisitosTexto}')" class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black uppercase text-[10px] flex items-center justify-center gap-2 shadow-lg active:scale-95 transition">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Compartir Requisitos
+                </button>
+            `;
             document.getElementById('modalInfo').classList.add('active');
+        }
+
+        function compartirPorWhatsApp(titulo, requisitos) {
+            const msj = `*MUNI SAN ROQUE DE CUMBAZA*\n\n📌 *Trámite:* ${titulo}\n\n📝 *Requisitos:*\n${requisitos}\n\n⚠️ _Todo trámite es presencial._\n🌐 _Portal desarrollado por: BJVR_`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msj)}`, '_blank');
         }
 
         function closeModal() { document.getElementById('modalInfo').classList.remove('active'); }
