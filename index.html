@@ -174,10 +174,32 @@
     </div>
 
  <script>
-        const agenda = [
-            { d: "24", m: "FEB", h: "09:00 AM", t: "Feria Gastronómica", l: "Plaza Central", color: "#f97316", dsc: "Exhibición de platos típicos de la zona." },
-            { d: "28", m: "FEB", h: "08:00 AM", t: "Campaña de Salud", l: "Frontis Municipal", color: "#3b82f6", dsc: "Atención médica integral gratuita." }
-        ];
+      const agenda = [
+    { 
+        d: "08", m: "MAR", h: "Todo el día", 
+        t: "Homenaje a la Mujer", 
+        l: "San Roque de Cumbaza", color: "#a855f7", 
+        dsc: "Un saludo especial del Área de Rentas a todas las mujeres de nuestro distrito en su día." 
+    },
+    { 
+        d: "15", m: "MAR", h: "07:30 AM", 
+        t: "Vencimiento: Agua y Desagüe", 
+        l: "Caja Municipal", color: "#3b82f6", 
+        dsc: "Estimado vecino, evite el corte y recargos. Hoy vence el plazo para el pago de su recibo de agua." 
+    },
+    { 
+        d: "25", m: "MAR", h: "08:00 AM", 
+        t: "Pago de Limpieza Pública (LP)", 
+        l: "Oficina de Rentas", color: "#00A350", 
+        dsc: "Contribuye con el ornato de San Roque. Realiza el pago de tus arbitrios de limpieza pública a tiempo." 
+    },
+    { 
+        d: "30", m: "MAR", h: "09:00 AM", 
+        t: "Feria Gastronómica", 
+        l: "Plaza Central", color: "#f97316", 
+        dsc: "Exhibición de platos típicos de la zona para cerrar el mes con nuestra identidad." 
+    }
+];
 
         const tasas = [
             { tipo: "TUPA", n: "Liquidación de Autovaluo", p: "Monto Variable",  r: "• Caso A (Nuevo): Escritura o Copia Literal + DNI.<br>• Caso B (Anual): DNI y Código de Contribuyente." },
@@ -281,28 +303,44 @@
         }
 
         // FUNCIÓN ACTUALIZADA CON BOTÓN DE COMPARTIR
-        function openTasaModal(t, r) {
-            document.getElementById('modalTitulo').innerText = t;
-            
-            // Limpiar los requisitos para el mensaje de WhatsApp (quitar etiquetas <br>)
-            const requisitosTexto = r.replace(/<br>/g, '\n').replace(/<b>/g, '').replace(/<\/b>/g, '');
-            
-            document.getElementById('modalCuerpo').innerHTML = `
-                <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Requisitos:</p>
-                <div class="bg-slate-50 p-4 rounded-2xl mb-4">${r}</div>
-                
-                <button onclick="compartirPorWhatsApp('${t}', '${requisitosTexto}')" class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black uppercase text-[10px] flex items-center justify-center gap-2 shadow-lg active:scale-95 transition">
-                    <i class="fa-brands fa-whatsapp text-lg"></i> Compartir Requisitos
-                </button>
-            `;
-            document.getElementById('modalInfo').classList.add('active');
-        }
+       function openTasaModal(t, r) {
+    document.getElementById('modalTitulo').innerText = t;
+    
+    // 1. Limpiamos el HTML para que sea solo texto plano para WhatsApp
+    // Quitamos etiquetas <br>, <b> y espacios extras
+    let textoLimpio = r.replace(/<br\s*\/?>/gi, '\n')
+                       .replace(/<[^>]*>/g, '')
+                       .trim();
 
-        function compartirPorWhatsApp(titulo, requisitos) {
-            const msj = `*MUNI SAN ROQUE DE CUMBAZA*\n\n📌 *Trámite:* ${titulo}\n\n📝 *Requisitos:*\n${requisitos}\n\n⚠️ _Todo trámite es presencial._\n🌐 _Portal desarrollado por: BJVR_`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msj)}`, '_blank');
-        }
+    document.getElementById('modalCuerpo').innerHTML = `
+        <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Requisitos:</p>
+        <div class="bg-slate-50 p-4 rounded-2xl mb-4 text-left text-[11px] leading-relaxed">${r}</div>
+        
+        <button id="btnWS" class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black uppercase text-[10px] flex items-center justify-center gap-2 shadow-lg active:scale-95 transition">
+            <i class="fa-brands fa-whatsapp text-lg"></i> Compartir Requisitos
+        </button>
+    `;
 
+    // 2. Usamos addEventListener para evitar problemas de comillas en el HTML
+    document.getElementById('btnWS').onclick = function() {
+        compartirPorWhatsApp(t, textoLimpio);
+    };
+
+    document.getElementById('modalInfo').classList.add('active');
+}
+
+function compartirPorWhatsApp(titulo, requisitos) {
+    // Formateamos el mensaje final
+    const msj = `*MUNI SAN ROQUE DE CUMBAZA*\n\n` +
+                `📌 *Trámite:* ${titulo.toUpperCase()}\n\n` +
+                `📝 *Requisitos:*\n${requisitos}\n\n` +
+                `⚠️ _Todo trámite es presencial._\n` +
+                `🌐 _Desarrollado por: BJVR_`;
+
+    // Usamos la API de WhatsApp universal
+    const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msj);
+    window.open(url, '_blank');
+}
         function closeModal() { document.getElementById('modalInfo').classList.remove('active'); }
 
         function filterData() {
