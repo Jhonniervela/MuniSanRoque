@@ -1,0 +1,16 @@
+{
+  "name": "Portal Municipal San Roque",
+  "short_name": "Muni San Roque",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00A350",
+  "icons": [
+    {
+      "src": "https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
