@@ -201,259 +201,523 @@
         </div>
     </div>
 
- <script>
-      const agenda = [
+<script>
+    const agenda = [
+        { d: "08", m: "MAR", h: "Todo el día", t: "Homenaje a la Mujer", l: "San Roque de Cumbaza", color: "#a855f7", dsc: "Un saludo especial del Área de Rentas a todas las mujeres de nuestro distrito en su día." },
+        { d: "15", m: "MAR", h: "07:30 AM", t: "Vencimiento: Agua y Desagüe", l: "Caja Municipal", color: "#3b82f6", dsc: "Estimado vecino, evite el corte y recargos. Hoy vence el plazo para el pago de su recibo de agua." },
+        { d: "25", m: "MAR", h: "08:00 AM", t: "Pago de Limpieza Pública (LP)", l: "Oficina de Rentas", color: "#00A350", dsc: "Contribuye con el ornato de San Roque. Realiza el pago de tus arbitrios de limpieza pública a tiempo." },
+        { d: "30", m: "MAR", h: "09:00 AM", t: "Feria Gastronómica", l: "Plaza Central", color: "#f97316", dsc: "Exhibición de platos típicos de la zona para cerrar el mes con nuestra identidad." }
+    ];
+
+   const tasas = [
+    // --- SERVICIOS TUPA ---
+    { tipo: "TUPA", n: "Liquidación de Autovaluo", p: "Monto Variable", icon: "fa-file-invoice-dollar", r: "• Caso A (Nuevo): Escritura o Copia Literal + DNI.<br>• Caso B (Anual): DNI y Código de Contribuyente." },
+    { tipo: "TUPA", n: "Licencia de Funcionamiento", p: "Monto Variable", icon: "fa-store", r: "• Solicitud dirigida a la oficina de rentas.<br>• Fotocopia del DNI.<br>• Fotocopia de RUC.<br>• Certificado Sanitario.<br>• Inspección de Defensa Civil." },
+    { tipo: "TUPA", n: "Constancia de No Adeudo", p: "S/. 10.00", icon: "fa-certificate", r: "• Recibo de pago por derecho de trámite.<br>• Estar al día en el pago de Impuesto Predial y Arbitrios.<br>• Copia de DNI del titular." },
+    { tipo: "TUPA", n: "Deterioro de pistas y veredas", p: "S/. 10.00", icon: "fa-road-barrier", r: "• Documento de notificación de liquidación.<br>• Pago por derecho de deterioro.<br>• Excavación para red de agua/desague." },
+    { tipo: "TUPA", n: "Expedicion de Constancia Negativa de Catastro", p: "S/. 30.00", icon: "fa-map-location-dot", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión.<br>• Fotocopia del DNI." },
+    { tipo: "TUPA", n: "Expedición de constancia de posecion", p: "S/. 20.00", icon: "fa-house-chimney-user", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión.<br>• Fotocopia del DNI." },
+    { tipo: "TUPA", n: "Licencia de Construccion", p: "S/. 45.00", icon: "fa-trowel-bricks", r: "• Formulario único oficial.<br>• Hoja de trámite.<br>• Pago de derecho de análisis.<br>• Copia literal o título de propiedad.<br>• Planos de arquitectura y ubicación." },
+    // --- PROCEDIMIENTOS REGISTRO CIVIL (TUPA) ---
     { 
-        d: "08", m: "MAR", h: "Todo el día", 
-        t: "Homenaje a la Mujer", 
-        l: "San Roque de Cumbaza", color: "#a855f7", 
-        dsc: "Un saludo especial del Área de Rentas a todas las mujeres de nuestro distrito en su día." 
+        tipo: "TUPA", 
+        n: "Inscripción Extraordinaria: Mayores de 18 años", 
+        p: "S/. 50.00", 
+        icon: "fa-address-card", 
+        r: "1. Solicitud en Formulario Único (FUPR) dirigida al Jefe de Registro Civil.<br>2. Pago de derecho de tramitación (S/. 50.00).<br>3. Pago de derecho de inscripción.<br>4. Adjuntar uno: Certificado de nacimiento, Partida de bautismo, Certificado escolar o Declaración Jurada de autoridad.<br>5. Certificado de antecedentes policiales o determinación de huella dactilar.<br>6. Declaración jurada de dos testigos ante el Registrador.<br><b>Plazo:</b> 5 días hábiles." 
     },
     { 
-        d: "15", m: "MAR", h: "07:30 AM", 
-        t: "Vencimiento: Agua y Desagüe", 
-        l: "Caja Municipal", color: "#3b82f6", 
-        dsc: "Estimado vecino, evite el corte y recargos. Hoy vence el plazo para el pago de su recibo de agua." 
+        tipo: "TUPA", 
+        n: "Reconocimiento de Hijos Extramatrimoniales (Mandato Judicial)", 
+        p: "S/. 50.00", 
+        icon: "fa-person-rays", 
+        r: "1. Solicitud (FUT) dirigida al Jefe de Registro Civil.<br>2. Pago de derecho de tramitación (S/. 50.00).<br>3. Pago de derecho de inscripción.<br>4. Fotocopia de DNI o Carné de Extranjería.<br>5. Acta rubricada ante el Registrador o Fotocopia autenticada de Escritura Pública/Testamento.<br><b>Plazo:</b> 5 días hábiles." 
     },
     { 
-        d: "25", m: "MAR", h: "08:00 AM", 
-        t: "Pago de Limpieza Pública (LP)", 
-        l: "Oficina de Rentas", color: "#00A350", 
-        dsc: "Contribuye con el ornato de San Roque. Realiza el pago de tus arbitrios de limpieza pública a tiempo." 
+        tipo: "TUPA", 
+        n: "Inscripción de Adopción (Por Mandato Judicial)", 
+        p: "S/. 30.00", 
+        icon: "fa-children", 
+        r: "1. Solicitud (FUT) dirigida al Jefe de Registro Civil.<br>2. Pago de derecho de inscripción (S/. 30.00) - Tramitación gratuita.<br>3. Fotocopia de DNI o Carné de Extranjería de adoptantes.<br>4. Fotocopia autenticada de la Resolución Judicial de adopción.<br>5. Constancia de resolución consentida o ejecutoriada.<br><b>Plazo:</b> 5 días hábiles." 
     },
     { 
-        d: "30", m: "MAR", h: "09:00 AM", 
-        t: "Feria Gastronómica", 
-        l: "Plaza Central", color: "#f97316", 
-        dsc: "Exhibición de platos típicos de la zona para cerrar el mes con nuestra identidad." 
-    }
+        tipo: "TUPA", 
+        n: "Inscripción de Adopción (Por Parte Notarial)", 
+        p: "S/. 30.00", 
+        icon: "fa-file-signature", 
+        r: "1. Solicitud (FUT) dirigida al Jefe de Registro Civil.<br>2. Pago de derecho de inscripción (S/. 30.00) - Tramitación gratuita.<br>3. Fotocopia de DNI o Carné de Extranjería de los adoptantes.<br>4. Remisión de partes de inscripción (oficio del notario con transcripción de escritura pública).<br><b>Plazo:</b> 5 días hábiles." 
+    },
+
+    // --- PROCEDIMIENTOS INFRAESTRUCTURA (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Certificado de Jurisdicción", 
+        p: "S/. 30.00", 
+        icon: "fa-map-location-dot", 
+        r: "1. Solicitud dirigida al Alcalde.<br>2. Copia simple de DNI.<br>3. Copia literal de dominio o documento de propiedad.<br>4. Plano de ubicación y perimétrico.<br>5. Recibo de pago por derecho de trámite." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Certificado de Numeración de Finca", 
+        p: "S/. 25.00", 
+        icon: "fa-house-chimney-user", 
+        r: "1. Solicitud dirigida al Alcalde.<br>2. Copia simple de DNI del propietario.<br>3. Copia de Autovaluo (PU y HR) actualizado.<br>4. Recibo de pago por derecho de trámite." 
+    },
+    // --- INSCRIPCIONES DE NACIMIENTO (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Inscripción Ordinaria: Nacimientos en Hospitales o Centros de Salud", 
+        p: "GRATUITO", 
+        icon: "fa-hospital-user", 
+        r: "• Plazo: Hasta 60 días de nacido.<br>1. Solicitud en Formulario Único (FUPR).<br>2. Fotocopia de DNI o Carné de Extranjería de los padres.<br>3. Certificado de nacido vivo (emitido por médico u obstetra) o Constancia de nacimiento del nosocomio.<br><b>Plazo de entrega:</b> 1 día hábil (Aprobación automática)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Inscripción Ordinaria: Nacimientos en Domicilios o Centros Particulares", 
+        p: "GRATUITO", 
+        icon: "fa-house-medical", 
+        r: "• Plazo: Hasta 60 días de nacido.<br>1. Solicitud en Formulario Único (FUPR).<br>2. Fotocopia de DNI o Carné de Extranjería del administrado.<br>3. Certificado de nacimiento emitido por profesional de salud o Constancia autorizada.<br><b>Plazo de entrega:</b> 1 día hábil (Aprobación automática)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Inscripción Extemporánea: Menores (Fuera de plazo de ley)", 
+        p: "Derecho de Trámite", 
+        icon: "fa-clock-rotate-left", 
+        r: "• Para menores no inscritos tras 60 días de nacido.<br>1. Solicitud en Formulario Único (FUPR).<br>2. Fotocopia de DNI de los padres.<br>3. Pruebas de nacimiento (Uno: Certificado médico, Partida bautismo, Matrícula escolar o Declaración de autoridad).<br>4. Declaración jurada de 2 testigos ante el Registrador.<br>5. Documento que acredite parentesco.<br><b>Plazo de entrega:</b> 5 días hábiles." 
+    },
+    // --- DEFUNCIONES Y EXISTENCIA (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Inscripción de Defunción (Causas Naturales)", 
+        p: "Derecho de Inscripción", 
+        icon: "fa-book-dead", 
+        r: "1. Solicitud (FUT) al Jefe de Registro Civil.<br>2. Pago de derecho de inscripción (Tramitación gratuita).<br>3. Copia de DNI del solicitante.<br>4. Certificado de Defunción médico o Declaración Jurada de autoridad.<br>5. DNI o Acta de Nacimiento del fallecido.<br><b>Plazo:</b> 5 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Inscripción de Defunción (Muerte Violenta)", 
+        p: "Derecho de Inscripción", 
+        icon: "fa-triangle-exclamation", 
+        r: "• Además de requisitos básicos:<br>1. Copia certificada del parte policial o judicial.<br>2. Certificado o protocolo de necropsia del médico legista.<br><b>Plazo:</b> 5 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Inscripción de Defunción (Muerte Presunta)", 
+        p: "Derecho de Inscripción", 
+        icon: "fa-scale-balanced", 
+        r: "1. Copia certificada de resolución judicial que declara muerte presunta.<br>2. Constancia de resolución consentida o ejecutoriada.<br><b>Plazo:</b> 5 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Inscripción de Reconocimiento de Existencia", 
+        p: "S/. 30.00", 
+        icon: "fa-user-check", 
+        r: "1. Solicitud y copia de DNI.<br>2. Copia certificada de resolución judicial de existencia.<br>3. Constancia de resolución ejecutoriada.<br><b>Plazo:</b> 5 días hábiles." 
+    },
+
+    // --- EXPEDICIÓN DE COPIAS CERTIFICADAS (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Copia Certificada de Acta (Uso Local)", 
+        p: "S/. 10.00 - 15.00", 
+        icon: "fa-copy", 
+        r: "• Nacimiento: S/. 10.00<br>• Matrimonio: S/. 15.00<br>• Defunción: S/. 15.00<br>1. Solicitud (FUT).<br>2. Recibo de pago correspondiente.<br><b>Plazo:</b> 1 día (Aprobación automática)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Copia Certificada de Acta (Para el Extranjero)", 
+        p: "S/. 20.00", 
+        icon: "fa-passport", 
+        r: "• Costo por cada acta (Nacimiento, Matrimonio o Defunción).<br>1. Solicitud (FUT).<br>2. Recibo de pago de S/. 20.00.<br><b>Plazo:</b> 1 día (Aprobación automática)." 
+    },
+    // --- RECTIFICACIONES Y CERTIFICADOS (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Rectificación Administrativa de Actas", 
+        p: "S/. 50.00", 
+        icon: "fa-file-pen", 
+        r: "• Para corrección de errores evidentes en actas.<br>1. Solicitud (FUT) al Jefe de Registro Civil.<br>2. Pago de derecho de trámite (S/. 50.00).<br>3. Copia de DNI.<br>4. Documento que dio origen al error (autenticado).<br><b>Plazo:</b> 5 días hábiles (Silencio Administrativo Positivo)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Expedición de Certificado Domiciliario", 
+        p: "S/. 15.00", 
+        icon: "fa-house-chimney-window", 
+        r: "1. Solicitud (FUT) al Jefe de Registro Civil.<br>2. Pago de derecho de trámite (S/. 15.00).<br>3. Copia de DNI.<br>4. Recibo original y copia de servicios (Luz, Agua o Teléfono).<br>5. Declaración Jurada de domicilio.<br><b>Plazo:</b> 1 día hábil (Aprobación automática)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Expedición de Constancia de No Inscripción", 
+        p: "S/. 20.00", 
+        icon: "fa-file-circle-xmark", 
+        r: "• Certifica que un hecho no está registrado en esta municipalidad.<br>1. Solicitud (FUT) al Jefe de Registro Civil.<br>2. Pago de derecho de trámite (S/. 20.00).<br>3. Copia de DNI.<br><b>Plazo:</b> 10 días hábiles (Silencio Administrativo Negativo)." 
+    },
+    // --- IMPUESTO PREDIAL Y RENTAS (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Declaración Jurada del Impuesto Predial", 
+        p: "S/. 10.00", 
+        icon: "fa-file-signature", 
+        r: "• Registro o actualización de predio.<br>1. Formulario de DJ llenado.<br>2. Pago de derecho (S/. 10.00).<br>3. Copia de DNI.<br>4. Copia de minuta o contrato compra-venta.<br>5. Copia de comprobante de Alcabala (si aplica).<br><b>Plazo:</b> 1 día (Automático)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Inafectación al Pago del Impuesto Predial", 
+        p: "S/. 10.00", 
+        icon: "fa-hand-holding-dollar", 
+        r: "1. Solicitud y pago de derecho (S/. 10.00).<br>2. Copia de DNI.<br>3. Copia fedateada de Escritura Pública o minuta.<br>4. Recibos de pago (Predial, Alcabala, Limpieza) de los últimos 3 meses.<br><b>Plazo:</b> 5 días (Silencio Positivo)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Pago Fraccionado del Impuesto Predial (03 cuotas)", 
+        p: "S/. 12.00", 
+        icon: "fa-calendar-check", 
+        r: "1. Solicitud.<br>2. Pago de derecho (S/. 12.00).<br>3. Copia de DNI.<br>4. Formato de DJ (Autovalúo).<br><b>Plazo:</b> 1 día (Automático)." 
+    },
+
+    // --- ESPECTÁCULOS PÚBLICOS (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Impuesto a los Espectáculos Públicos no Deportivos", 
+        p: "S/. 48.00", 
+        icon: "fa-ticket", 
+        r: "1. Formulario de DJ llenado.<br>2. Pago de derecho (S/. 48.00).<br>3. Copia de DNI.<br>4. Fotocopia fedateada de factura/boleta de tickets.<br><b>Plazo:</b> 1 día (Automático)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Exoneración de Impuesto (Eventos Culturales)", 
+        p: "S/. 5.00", 
+        icon: "fa-clapperboard", 
+        r: "1. Solicitud y pago de derecho (S/. 5.00).<br>2. Copia de DNI.<br>3. Documento del Ministerio de Cultura (calificación cultural).<br><b>Plazo:</b> 2 días (Silencio Negativo)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Autorización de Espectáculos Públicos No Deportivos", 
+        p: "S/. 10.00", 
+        icon: "fa-masks-theater", 
+        r: "1. Solicitud y copia de DNI.<br>2. Copia de factura de impresión de tickets.<br>3. Certificado de Seguridad en Defensa Civil.<br>4. Pago de derecho (S/. 10.00).<br><b>Plazo:</b> 5 días (Silencio Positivo)." 
+    },
+
+    // --- CONSTANCIAS DE DEUDA (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Expedición de Estado de Cuenta Tributaria", 
+        p: "S/. 5.00", 
+        icon: "fa-file-invoice-dollar", 
+        r: "1. Solicitud dirigida a Rentas.<br>2. Pago de derecho (S/. 5.00).<br>3. Copia de DNI.<br><b>Plazo:</b> 1 día (Automático)." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Constancia de No Adeudar (Predial/Tasas)", 
+        p: "S/. 10.00", 
+        icon: "fa-shield-check", 
+        r: "1. Solicitud dirigida a Rentas.<br>2. Pago de derecho (S/. 10.00).<br>3. Copia de DNI.<br><b>Plazo:</b> 2 días (Silencio Negativo)." 
+    },
+    // --- LICENCIAS DE FUNCIONAMIENTO (TUPA) ---
+    { 
+        tipo: "TUPA", 
+        n: "Licencia: Establecimientos Comerciales (Hasta 100 m2)", 
+        p: "S/. 100.00", 
+        icon: "fa-store", 
+        r: "1. DNI y RUC activo.<br>2. Certificado de Defensa Civil.<br><b>Plazo:</b> 10 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Licencia: Locales Comerciales (100 m2 a 500 m2)", 
+        p: "S/. 180.00", 
+        icon: "fa-shop", 
+        r: "1. DNI y RUC.<br>2. Inspección Técnica de Seguridad (ITSE) Básica.<br><b>Plazo:</b> 10 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Licencia: Expendio de Comidas y Bebidas", 
+        p: "S/. 100.00", 
+        icon: "fa-utensils", 
+        r: "1. DNI y RUC.<br>2. Certificado Sanitario.<br>3. Certificado de Defensa Civil.<br><b>Plazo:</b> 10 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Licencia: Molinos de Arroz y Granos", 
+        p: "S/. 100.00", 
+        icon: "fa-wheat-awn", 
+        r: "1. RUC activo.<br>2. Certificado Sanitario.<br>3. Certificado de Defensa Civil.<br><b>Plazo:</b> 15 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Licencia para MYPES", 
+        p: "S/. 180.00", 
+        icon: "fa-industry", 
+        r: "1. Acreditar condición de Micro o Pequeña Empresa.<br>2. Requisitos de ley para el giro correspondiente.<br><b>Plazo:</b> 10 días hábiles." 
+    },
+    { 
+        tipo: "TUPA", 
+        n: "Renovación o Duplicado de Licencia", 
+        p: "S/. 50.00 - 100.00", 
+        icon: "fa-arrows-rotate", 
+        r: "• Renovación (Cambio giro/domicilio): S/. 100.00.<br>• Duplicado de Licencia: S/. 50.00.<br>1. Solicitud y recibo de pago." 
+    },
+
+    // --- SERVICIOS DE AGUA Y TANQUE (TUSNE) ---
+    { 
+        tipo: "TUSNE", 
+        n: "Venta de Agua por Tanque", 
+        p: "S/. 5.00 - 15.00", 
+        icon: "fa-truck-water", 
+        r: "• Hasta 1000 m³: S/. 5.00.<br>• Hasta 2000 m³: S/. 10.00.<br>• Más de 2000 m³: S/. 15.00." 
+    },
+    { 
+        tipo: "TUSNE", 
+        n: "Reconexión del Servicio de Agua", 
+        p: "S/. 10.00", 
+        icon: "fa-faucet-drip", 
+        r: "1. Recibo de pago de derecho de reconexión.<br>2. No mantener deudas pendientes con el servicio." 
+    },
+
+    // --- ALQUILERES DE EQUIPOS Y ESPACIOS (TUSNE) ---
+    { 
+        tipo: "TUSNE", 
+        n: "Alquiler de Auditorio Municipal", 
+        p: "S/. 20.00 - 30.00", 
+        icon: "fa-building-user", 
+        r: "• Turno Noche + Electricidad: S/. 30.00.<br>• Turno Día + Electricidad: S/. 20.00." 
+    },
+    { 
+        tipo: "TUSNE", 
+        n: "Alquiler de Mezcladora de Concreto", 
+        p: "S/. 30.00 - 60.00", 
+        icon: "fa-trowel-bricks", 
+        r: "• Dentro de San Roque: S/. 30.00 por día.<br>• Fuera del distrito: S/. 60.00 por día (requiere contrato)." 
+    },
+    { 
+        tipo: "TUSNE", 
+        n: "Servicio de Furgón (Vuelta)", 
+        p: "S/. 10.00", 
+        icon: "fa-truck-ramp-box", 
+        r: "• Costo por vuelta en los alrededores del pueblo." 
+    },
+
+    // --- VENTA DE PRODUCTOS Y RECICLAJE (TUSNE) ---
+    { 
+        tipo: "TUSNE", 
+        n: "Venta de Abono Orgánico (PETAR)", 
+        p: "S/. 0.70 / Kg", 
+        icon: "fa-seedling", 
+        r: "• Venta por kilo directamente en la planta de tratamiento." 
+    },
+    { 
+        tipo: "TUSNE", 
+        n: "Venta de Residuos Sólidos (Reciclaje)", 
+        p: "S/. 0.20 - 0.50", 
+        icon: "fa-recycle", 
+        r: "• Botellas plásticas: S/. 0.50 el kilo.<br>• Fierros: S/. 0.20 el kilo." 
+    },
+
+    // --- OFICINA DE ABASTECIMIENTO Y LOGÍSTICA (TUSNE) ---
+    { tipo: "TUSNE", n: "Alquiler de Auditorio Eventos Culturales", p: "Ver detalle", icon: "fa-building-columns", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día):<br>• Con equipo de Sonido.<br>• Sin equipo de Sonido." },
+    { tipo: "TUSNE", n: "Alquiler de Sonido", p: "S/. 150.00", icon: "fa-volume-high", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de sillas", p: "S/. 1.00", icon: "fa-chair", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día/unidad)." },
+    { tipo: "TUSNE", n: "Alquiler de bancas", p: "S/. 1.50", icon: "fa-couch", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de Toldo (cada uno)", p: "S/. 30.00", icon: "fa-tent", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de mesas de madera", p: "S/. 10.00", icon: "fa-table", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de proyector", p: "S/. 20.00", icon: "fa-video", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de Saltarín por día", p: "S/. 80.00", icon: "fa-children", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de Trompo (mezclador) por hora", p: "S/. 80.00", icon: "fa-shirley-temple", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por hora)." },
+    { tipo: "TUSNE", n: "Alquiler de Motofurgón", p: "S/. 20.00", icon: "fa-truck-pickup", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de Fumigadora", p: "S/. 20.00", icon: "fa-spray-can-sparkles", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por día)." },
+    { tipo: "TUSNE", n: "Alquiler de Chaleadora (sin combustible)", p: "S/. 15.00", icon: "fa-scissors", r: "1. Solicitud.<br>2. Fotocopia Simple de DNI.<br>3. Recibo de Pago por Alquiler (por hora)." },
+
+    // --- INFRAESTRUCTURA Y OBRAS ---
+    { tipo: "TUSNE", n: "Fichas técnicas particulares", p: "S/. 500.00", icon: "fa-file-signature", r: "1. Solicitud.<br>2. Formato lleno.<br>3. Copia de DNI.<br>4. Recibo de pago." },
+    { tipo: "TUSNE", n: "Visitas Técnicas particulares", p: "S/. 150.00", icon: "fa-helmet-safety", r: "1. Solicitud.<br>2. Formato lleno.<br>3. Copia de DNI.<br>4. Recibo de pago." },
+    { tipo: "TUSNE", n: "Elaboración de documentos", p: "GRATUITO", icon: "fa-handshake-angle", r: "1. Solicitud verbal (Para beneficio del ciudadano)." },
+
+    // --- CEMENTERIO ---
+    { tipo: "TUSNE", n: "Entierro Adulto (Terreno)", p: "S/. 100.00", icon: "fa-monument", r: "1. Solicitud.<br>2. Partida de defunción.<br>3. Recibo de Pago.<br>• Dimensión: 2.5 M2." },
+    { tipo: "TUSNE", n: "Entierro Niños (Terreno)", p: "S/. 50.00", icon: "fa-cross", r: "1. Solicitud.<br>2. Partida de defunción.<br>3. Recibo de Pago.<br>• Dimensión: 1.5 M2." },
+    { tipo: "TUSNE", n: "Construcción de mausoleo", p: "S/. 50.00", icon: "fa-gopuram", r: "1. Solicitud.<br>2. Recibo de Pago." },
+    { tipo: "TUSNE", n: "Exhumación de cadáveres", p: "S/. 300.00", icon: "fa-box-archive", r: "1. Solicitud.<br>2. Autorización Ministerio Público.<br>3. Recibo de Pago." },
+
+    // --- DEPORTES ---
+    { tipo: "TUSNE", n: "Estadio (Fútbol Prof.)", p: "10% Taquilla", icon: "fa-ranking-star", r: "1. Solicitud.<br>2. DNI.<br>3. Pago de 10% de recaudación." },
+    { tipo: "TUSNE", n: "Estadio (Otras categorías)", p: "S/. 100.00", icon: "fa-futbol", r: "• Por día.<br>1. Solicitud.<br>2. DNI.<br>3. Recibo de Pago." },
+    { tipo: "TUSNE", n: "Losa Deportiva (Eventos)", p: "S/. 150.00", icon: "fa-masks-theater", r: "• Eventos sociales/culturales.<br>1. Solicitud.<br>2. DNI.<br>3. Recibo de Pago." },
+
+    // --- MEDIO AMBIENTE Y TURISMO (BALNEARIO) ---
+    { tipo: "TUSNE", n: "Entrada Balneario (Adulto)", p: "S/. 3.00", icon: "fa-umbrella-beach", r: "1. Pago en boletería por derecho de ingreso." },
+    { tipo: "TUSNE", n: "Entrada Balneario (Niños)", p: "S/. 1.50", icon: "fa-child-reaching", r: "• De 05 a 12 años.<br>1. Pago en boletería." },
+    { tipo: "TUSNE", n: "Estacionamiento Carro", p: "S/. 5.00", icon: "fa-car-side", r: "1. Pago por concepto de seguridad y estacionamiento." },
+    { tipo: "TUSNE", n: "Servicios Higiénicos", p: "S/. 0.50", icon: "fa-restroom", r: "• Con papel: S/. 0.50<br>• Sin papel: S/. 0.30" },
+
+    // --- AGUA Y ALCANTARILLADO (ATM/UGSS) ---
+    { tipo: "TUSNE", n: "Consumo Agua Mensual", p: "Desde S/. 5.00", icon: "fa-droplet", r: "• Doméstico: S/. 5.00<br>• Comercial: S/. 20.00<br>• Industrial: S/. 50.00" },
+    { tipo: "TUSNE", n: "Servicio Alcantarillado", p: "Desde S/. 1.00", icon: "fa-faucet", r: "• Doméstico: S/. 1.00<br>• Comercial: S/. 1.50<br>• Industrial: S/. 2.10" },
+    { tipo: "TUSNE", n: "Reconexión de Agua", p: "S/. 25.00", icon: "fa-wrench", r: "1. Formato firmado.<br>2. Pago de deuda.<br>3. Pago de derecho de reconexión." },
+    { tipo: "TUSNE", n: "Multa: Instalación Clandestina", p: "S/. 100.00", icon: "fa-triangle-exclamation", r: "• Agua o alcantarillado sin autorización.<br>• Sujeto a corte inmediato." },
+    { tipo: "TUSNE", n: "Multa: Desperdicio de Agua", p: "S/. 50.00", icon: "fa-water-ladder", r: "• Lavado de veredas, riego de calles o llenado de piscinas sin permiso." }
 ];
+    const oficinas = [
+        { nombre: "Gerencia y Secretaría", subs: [ { n: "Secretaría General", e: "Mesa de Partes", tel: "51969356686", msg: "Consulta trámite." }, { n: "Imagen Institucional", e: "Prensa y Eventos", tel: "51969356686", msg: "Consulta eventos." } ] },
+        { nombre: "Administración y Rentas", subs: [ { n: "Caja", e: "Sr. Brayan Vela", tel: "51969356686", msg: "Consulta sobre pagos." }, { n: "Contabilidad", e: "Gestión Financiera", tel: "51969356686", msg: "Asuntos contables." } ] },
+        { nombre: "Servicios a la Ciudad", subs: [ { n: "Agua (ATM)", e: "Saneamiento", tel: "51969356686", msg: "Reporte de agua." }, { n: "Limpieza Pública", e: "Gestión de Residuos", tel: "51969356686", msg: "Reporte de basura." } ] }
+    ];
 
-        const tasas = [
-            { tipo: "TUPA", n: "Liquidación de Autovaluo", p: "Monto Variable",  r: "• Caso A (Nuevo): Escritura o Copia Literal + DNI.<br>• Caso B (Anual): DNI y Código de Contribuyente." },
-            { tipo: "TUPA", n: "Licencia de Funcionamiento", p: "Monto Variable",  r: "• Solicitud dirigida a la oficina de rentas.<br>• Fotocopia del DNI.<br>• Fotocopia de RUC.<br>• Certificado Sanitario.<br>• Inspección de Defensa Civil." },
-            { tipo: "TUPA", n: "Constancia de No Adeudo", p: "S/. 10.00", r: "• Recibo de pago por derecho de trámite.<br>• Estar al día en el pago de Impuesto Predial y Arbitrios.<br>• Copia de DNI del titular." },
-            { tipo: "TUPA", n: "Deterioro de pistas y veredas", p: "S/. 10.00", r: "• Documento de notificación de liquidación.<br>• Pago por derecho de deterioro.<br>• Excavación para red de agua/desague." },
-            { tipo: "TUPA", n: "Expedicion de Constancia Negativa de Catastro", p: "S/. 30.00", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión.<br>• Fotocopia del DNI." },
-            { tipo: "TUPA", n: "Expedición de constancia de posecion", p: "S/. 20.00", r: "• Solicitud dirigida al director de infraestructura.<br>• Pago de derecho de emisión.<br>• Fotocopia del DNI." },
-            { tipo: "TUPA", n: "Licencia de Construccion", p: "S/. 45.00", r: "• Formulario único oficial.<br>• Hoja de trámite.<br>• Pago de derecho de análisis.<br>• Copia literal o título de propiedad.<br>• Planos de arquitectura y ubicación." },
-            { tipo: "TUSNE", n: "Alquiler de losa deportiva", p: "S/. --", r: "• Solicitud.<br>• Fotocopia Simple DNI.<br>• Pago por hora (8.00 s/) o día (100.00 s/)." }
-        ];
-
-        const oficinas = [
-            { 
-                nombre: "Gerencia y Secretaría", 
-                subs: [
-                    { n: "Secretaría General", e: "Mesa de Partes", tel: "51969356686", msg: "Consulta trámite." },
-                    { n: "Imagen Institucional", e: "Prensa y Eventos", tel: "51969356686", msg: "Consulta eventos." }
-                ]
-            },
-            { 
-                nombre: "Administración y Rentas", 
-                subs: [
-                    { n: "Caja", e: "Sr. Brayan Vela", tel: "51969356686", msg: "Consulta sobre pagos." },
-                    { n: "Contabilidad", e: "Gestión Financiera", tel: "51969356686", msg: "Asuntos contables." }
-                ]
-            },
-            { 
-                nombre: "Servicios a la Ciudad", 
-                subs: [
-                    { n: "Agua (ATM)", e: "Saneamiento", tel: "51969356686", msg: "Reporte de agua." },
-                    { n: "Limpieza Pública", e: "Gestión de Residuos", tel: "51969356686", msg: "Reporte de basura." }
-                ]
-            }
-        ];
-
-        function actualizarReloj() {
-            const ahora = new Date();
-            const opciones = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-            document.getElementById('txt-fecha').innerText = ahora.toLocaleDateString('es-ES', opciones);
-            document.getElementById('txt-hora').innerText = ahora.toLocaleTimeString('es-ES', {hour12: false});
-        }
-        setInterval(actualizarReloj, 1000);
-
-        function switchTab(tab) {
-            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`view-${tab}`).classList.add('active');
-            document.getElementById(`btn-${tab}`).classList.add('active');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        function init() {
-            document.getElementById('listaAgenda').innerHTML = agenda.map((e, idx) => `
-                <div onclick="openAgendaModal(${idx})" class="bg-white p-6 rounded-[2.5rem] flex items-center shadow-md border-l-8 cursor-pointer active:scale-95 transition" style="border-color: ${e.color}">
-                    <div class="text-center pr-5 border-r min-w-[70px]">
-                        <span class="block text-2xl font-black text-slate-800 leading-none">${e.d}</span>
-                        <span class="block text-[10px] font-black uppercase" style="color: ${e.color}">${e.m}</span>
-                    </div>
-                    <div class="ml-5 text-left">
-                        <h4 class="text-[11px] font-black uppercase italic text-slate-700">${e.t}</h4>
-                        <p class="text-[9px] text-slate-400 font-bold mt-1"><i class="fa-solid fa-clock mr-1"></i>${e.h}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            document.getElementById('listaTasas').innerHTML = tasas.map(t => `
-                <div class="p-6 rounded-[2.5rem] flex justify-between items-center shadow-sm bg-white border border-slate-100 item-search">
-                    <div>
-                        <span class="px-2 py-0.5 rounded-full text-white text-[8px] font-black ${t.tipo === 'TUPA' ? 'bg-green-600' : 'bg-amber-500'}">${t.tipo}</span>
-                        <h4 class="font-black text-[11px] uppercase mt-2 text-slate-800">${t.n}</h4>
-                        <span class="text-institucional font-black text-[13px]">${t.p}</span>
-                    </div>
-                    <button onclick="openTasaModal('${t.n}', '${t.r}')" class="bg-slate-50 text-slate-800 px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-sm active:scale-90 transition">Ver Info</button>
-                </div>
-            `).join('');
-
-           // Busca esta parte en tu función init()
-document.getElementById('listaOficinas').innerHTML = oficinas.map(o => `
-    <div class="bg-white p-6 rounded-[3rem] shadow-sm border border-slate-100 mb-2">
-        <h4 class="font-black text-xs uppercase italic text-slate-800 mb-4 tracking-widest flex items-center gap-3">
-            <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-6 w-6 object-contain">
-            ${o.nombre}
-        </h4>
-        <div class="grid md:grid-cols-2 gap-3">
-            ${o.subs.map(s => `
-                <div class="bg-slate-50 p-4 rounded-3xl flex justify-between items-center border border-slate-100">
-                    <div>
-                        <h5 class="text-[10px] font-black text-slate-800 uppercase leading-none">${s.n}</h5>
-                        <p class="text-[9px] font-bold text-slate-400 mt-1 italic">${s.e}</p>
-                    </div>
-                 
-<a href="https://wa.me/${s.tel}?text=${encodeURIComponent(s.msg)}" 
-   class="btn-wa-oficina bg-white p-3 rounded-2xl text-green-600 shadow-sm transition active:scale-125">
-    <i class="fa-brands fa-whatsapp text-2xl"></i>
-</a>
-                </div>
-            `).join('')}
-        </div>
-    </div>
-`).join('');
-        }
-
-        function openAgendaModal(idx) {
-            const e = agenda[idx];
-            document.getElementById('modalTitulo').innerText = e.t;
-            document.getElementById('modalCuerpo').innerHTML = `<p><b>Hora:</b> ${e.h}</p><p><b>Lugar:</b> ${e.l}</p><div class="bg-slate-50 p-4 rounded-2xl mt-4 border-l-4 border-institucional">${e.dsc}</div>`;
-            document.getElementById('modalInfo').classList.add('active');
-        }
-
-        // FUNCIÓN ACTUALIZADA CON BOTÓN DE COMPARTIR
-       function openTasaModal(t, r) {
-    document.getElementById('modalTitulo').innerText = t;
-    
-    // 1. Limpiamos el HTML para que sea solo texto plano para WhatsApp
-    // Quitamos etiquetas <br>, <b> y espacios extras
-    let textoLimpio = r.replace(/<br\s*\/?>/gi, '\n')
-                       .replace(/<[^>]*>/g, '')
-                       .trim();
-
-    document.getElementById('modalCuerpo').innerHTML = `
-        <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Requisitos:</p>
-        <div class="bg-slate-50 p-4 rounded-2xl mb-4 text-left text-[11px] leading-relaxed">${r}</div>
-        
-        <button id="btnWS" class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black uppercase text-[10px] flex items-center justify-center gap-2 shadow-lg active:scale-95 transition">
-            <i class="fa-brands fa-whatsapp text-lg"></i> Compartir Requisitos
-        </button>
-    `;
-
-    // 2. Usamos addEventListener para evitar problemas de comillas en el HTML
-    document.getElementById('btnWS').onclick = function() {
-        compartirPorWhatsApp(t, textoLimpio);
-    };
-
-    document.getElementById('modalInfo').classList.add('active');
-}
-
-function compartirPorWhatsApp(titulo, requisitos) {
-    // Formateamos el mensaje final
-    const msj = `*MUNI SAN ROQUE DE CUMBAZA*\n\n` +
-                `📌 *Trámite:* ${titulo.toUpperCase()}\n\n` +
-                `📝 *Requisitos:*\n${requisitos}\n\n` +
-                `⚠️ _Todo trámite es presencial._\n` +
-                `🌐 _Desarrollado por: BJVR_`;
-
-    // Usamos la API de WhatsApp universal
-    const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msj);
-    window.open(url, '_blank');
-}
-        function closeModal() { document.getElementById('modalInfo').classList.remove('active'); }
-
-        function filterData() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.item-search').forEach(item => {
-                item.style.display = item.innerText.toLowerCase().includes(input) ? "flex" : "none";
-            });
-        }
-
-       // UNIFICACIÓN DE CARGA DEL SISTEMA
-window.onload = () => {
-    // 1. Quitar pantalla de carga
-    setTimeout(() => {
-        const loader = document.getElementById('loading-screen');
-        if(loader) loader.classList.add('fade-out');
-    }, 800);
-
-    // 2. Iniciar funciones principales
-    actualizarReloj();
-    init(); 
-    
-    // 3. Iniciar estado de atención
-    actualizarEstadoAtencion();
-    
-    // 4. Configurar intervalos
-    setInterval(actualizarReloj, 1000);
-    setInterval(actualizarEstadoAtencion, 60000); // Revisa horario cada minuto
-};
-
-function actualizarEstadoAtencion() {
-    const ahora = new Date();
-    const horaDecimal = ahora.getHours() + ahora.getMinutes() / 60;
-    const diaSemana = ahora.getDay(); 
-
-    const inicioAtencion = 7.5; // 7:30 AM
-    const finAtencion = 15.5;   // 3:30 PM
-
-    const dot = document.getElementById('status-icon');
-    const text = document.getElementById('status-text');
-    const msgBienvenida = document.getElementById('msg-bienvenida');
-    const botonesWA = document.querySelectorAll('.btn-wa-oficina');
-
-    if (!dot || !text || !msgBienvenida) return;
-
-    // VARIABLE MAESTRA: ¿Está abierto?
-    const estaAbierto = (diaSemana >= 1 && diaSemana <= 5 && horaDecimal >= inicioAtencion && horaDecimal <= finAtencion);
-
-    // CONTROL DE LOS BOTONES DE WHATSAPP
-    botonesWA.forEach(btn => {
-        if (estaAbierto) {
-            // ESTADO: ATENCIÓN (VERDE)
-            btn.style.backgroundColor = "#22c55e"; // Fondo verde
-            btn.style.color = "white";             // Ícono blanco
-            btn.style.pointerEvents = "auto";      // Habilitar clic
-            btn.style.opacity = "1";
-        } else {
-            // ESTADO: CERRADO (ROJO)
-            btn.style.backgroundColor = "#ef4444"; // Fondo rojo
-            btn.style.color = "white";             // Ícono blanco
-            btn.style.pointerEvents = "none";      // Bloquear clic
-            btn.style.opacity = "0.7";             // Un poco transparente para notar el bloqueo
-        }
-    });
-
-    // ACTUALIZACIÓN DE INDICADORES SUPERIORES
-    if (estaAbierto) {
-        dot.className = 'status-dot dot-online';
-        text.innerText = 'Atendiendo Ahora';
-        text.style.color = '#16a34a';
-        msgBienvenida.innerText = "¡Buen día, vecino! Estamos listos para atenderle.";
-    } else {
-        dot.className = 'status-dot dot-offline'; 
-        text.innerText = 'Oficina Cerrada';
-        text.style.color = '#ef4444';
-        msgBienvenida.innerText = "Gracias por visitarnos. Atendemos de lunes a viernes.";
+    function actualizarReloj() {
+        const ahora = new Date();
+        const opciones = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        document.getElementById('txt-fecha').innerText = ahora.toLocaleDateString('es-ES', opciones);
+        document.getElementById('txt-hora').innerText = ahora.toLocaleTimeString('es-ES', {hour12: false});
     }
-}
+
+    function switchTab(tab) {
+        document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`view-${tab}`).classList.add('active');
+        document.getElementById(`btn-${tab}`).classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function init() {
+        // Render Agenda
+        document.getElementById('listaAgenda').innerHTML = agenda.map((e, idx) => `
+            <div onclick="openAgendaModal(${idx})" class="bg-white p-6 rounded-[2.5rem] flex items-center shadow-md border-l-8 cursor-pointer active:scale-95 transition" style="border-color: ${e.color}">
+                <div class="text-center pr-5 border-r min-w-[70px]">
+                    <span class="block text-2xl font-black text-slate-800 leading-none">${e.d}</span>
+                    <span class="block text-[10px] font-black uppercase" style="color: ${e.color}">${e.m}</span>
+                </div>
+                <div class="ml-5 text-left">
+                    <h4 class="text-[11px] font-black uppercase italic text-slate-700">${e.t}</h4>
+                    <p class="text-[9px] text-slate-400 font-bold mt-1"><i class="fa-solid fa-clock mr-1"></i>${e.h}</p>
+                </div>
+            </div>
+        `).join('');
+
+        // Render Tasas
+        document.getElementById('listaTasas').innerHTML = tasas.map(t => `
+            <div class="p-6 rounded-[2.5rem] flex justify-between items-center shadow-sm bg-white border border-slate-100 item-search">
+                <div>
+                    <span class="px-2 py-0.5 rounded-full text-white text-[8px] font-black ${t.tipo === 'TUPA' ? 'bg-green-600' : 'bg-amber-500'}">${t.tipo}</span>
+                    <h4 class="font-black text-[11px] uppercase mt-2 text-slate-800">${t.n}</h4>
+                    <span class="text-institucional font-black text-[13px]">${t.p}</span>
+                </div>
+                <button onclick="openTasaModal('${t.n}', '${t.r}')" class="bg-slate-50 text-slate-800 px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-sm active:scale-90 transition">Ver Info</button>
+            </div>
+        `).join('');
+
+        // Render Oficinas
+        document.getElementById('listaOficinas').innerHTML = oficinas.map(o => `
+            <div class="bg-white p-6 rounded-[3rem] shadow-sm border border-slate-100 mb-2">
+                <h4 class="font-black text-xs uppercase italic text-slate-800 mb-4 tracking-widest flex items-center gap-3">
+                    <img src="https://www.contrataciones.pe/organizaciones/licitaciones-municipalidad-de-san-roque-de-cumbaza.png" class="h-6 w-6 object-contain">
+                    ${o.nombre}
+                </h4>
+                <div class="grid md:grid-cols-2 gap-3">
+                    ${o.subs.map(s => `
+                        <div class="bg-slate-50 p-4 rounded-3xl flex justify-between items-center border border-slate-100">
+                            <div>
+                                <h5 class="text-[10px] font-black text-slate-800 uppercase leading-none">${s.n}</h5>
+                                <p class="text-[9px] font-bold text-slate-400 mt-1 italic">${s.e}</p>
+                            </div>
+                            <a href="https://wa.me/${s.tel}?text=${encodeURIComponent(s.msg)}" class="btn-wa-oficina bg-white p-3 rounded-2xl text-green-600 shadow-sm transition active:scale-125">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            </a>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Lógica de Modales
+    function openAgendaModal(idx) {
+        const e = agenda[idx];
+        document.getElementById('modalTitulo').innerText = e.t;
+        document.getElementById('modalCuerpo').innerHTML = `<p><b>Hora:</b> ${e.h}</p><p><b>Lugar:</b> ${e.l}</p><div class="bg-slate-50 p-4 rounded-2xl mt-4 border-l-4 border-institucional">${e.dsc}</div>`;
+        document.getElementById('modalInfo').classList.add('active');
+    }
+
+    function openTasaModal(t, r) {
+        document.getElementById('modalTitulo').innerText = t;
+        let textoLimpio = r.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]*>/g, '').trim();
+        document.getElementById('modalCuerpo').innerHTML = `
+            <p class="text-[10px] font-black uppercase text-slate-400 mb-2">Requisitos:</p>
+            <div class="bg-slate-50 p-4 rounded-2xl mb-4 text-left text-[11px] leading-relaxed">${r}</div>
+            <button id="btnWS" class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black uppercase text-[10px] flex items-center justify-center gap-2 shadow-lg active:scale-95 transition">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Compartir Requisitos
+            </button>`;
+        document.getElementById('btnWS').onclick = () => compartirPorWhatsApp(t, textoLimpio);
+        document.getElementById('modalInfo').classList.add('active');
+    }
+
+    function compartirPorWhatsApp(titulo, requisitos) {
+        const msj = `*MUNI SAN ROQUE DE CUMBAZA*\n\n📌 *Trámite:* ${titulo.toUpperCase()}\n\n📝 *Requisitos:*\n${requisitos}\n\n⚠️ _Todo trámite es presencial._\n🌐 _Portal Digital_`;
+        window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(msj), '_blank');
+    }
+
+    function closeModal() { document.getElementById('modalInfo').classList.remove('active'); }
+
+    function filterData() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.item-search').forEach(item => {
+            item.style.display = item.innerText.toLowerCase().includes(input) ? "flex" : "none";
+        });
+    }
+
+    // --- FUNCIÓN DE CONTROL DE HORARIOS (ACTUALIZADA) ---
+    function actualizarEstadoAtencion() {
+        const ahora = new Date();
+        const horaDecimal = ahora.getHours() + ahora.getMinutes() / 60;
+        const diaSemana = ahora.getDay(); 
+
+        const inicioAtencion = 7.5; // 7:30 AM
+        const finAtencion = 15.5;   // 3:30 PM
+
+        const estaAbierto = (diaSemana >= 1 && diaSemana <= 5 && horaDecimal >= inicioAtencion && horaDecimal <= finAtencion);
+
+        // 1. Controlar botones de Oficinas
+        document.querySelectorAll('.btn-wa-oficina').forEach(btn => {
+            btn.style.backgroundColor = estaAbierto ? "#22c55e" : "#ef4444";
+            btn.style.pointerEvents = estaAbierto ? "auto" : "none";
+            btn.style.opacity = estaAbierto ? "1" : "0.7";
+        });
+
+        // 2. Controlar botón de Reporte Ciudadano (NUEVO)
+        const btnReporte = document.querySelector('#view-ayuda a');
+        if (btnReporte) {
+            btnReporte.style.backgroundColor = estaAbierto ? "#25D366" : "#ef4444";
+            btnReporte.style.pointerEvents = estaAbierto ? "auto" : "none";
+            btnReporte.style.opacity = estaAbierto ? "1" : "0.7";
+            btnReporte.innerHTML = estaAbierto 
+                ? '<i class="fa-brands fa-whatsapp text-2xl"></i> Enviar a WhatsApp'
+                : '<i class="fa-solid fa-clock text-2xl"></i> Fuera de Horario';
+        }
+
+        // 3. Actualizar Indicadores Visuales
+        const dot = document.getElementById('status-icon');
+        const text = document.getElementById('status-text');
+        const msgBienvenida = document.getElementById('msg-bienvenida');
+
+        if (dot && text && msgBienvenida) {
+            dot.className = estaAbierto ? 'status-dot dot-online' : 'status-dot dot-offline';
+            text.innerText = estaAbierto ? 'Atendiendo Ahora' : 'Oficina Cerrada';
+            text.style.color = estaAbierto ? '#16a34a' : '#ef4444';
+            msgBienvenida.innerText = estaAbierto 
+                ? "¡Buen día, vecino! Estamos listos para atenderle." 
+                : "Gracias por visitarnos. El horario de atención es L-V de 7:30 AM a 3:30 PM.";
+        }
+    }
+
+    window.onload = () => {
+        setTimeout(() => {
+            const loader = document.getElementById('loading-screen');
+            if(loader) loader.classList.add('fade-out');
+        }, 800);
+        actualizarReloj();
+        init(); 
+        actualizarEstadoAtencion();
+        setInterval(actualizarReloj, 1000);
+        setInterval(actualizarEstadoAtencion, 60000);
+    };
+</script>
     </script>
 </body>
 </html>
