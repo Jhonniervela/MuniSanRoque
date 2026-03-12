@@ -204,9 +204,17 @@
 <script>
     const agenda = [
         { d: "08", m: "MAR", h: "Todo el día", t: "Homenaje a la Mujer", l: "San Roque de Cumbaza", color: "#a855f7", dsc: "Un saludo especial del Área de Rentas a todas las mujeres de nuestro distrito en su día." },
-        { d: "15", m: "MAR", h: "07:30 AM", t: "Vencimiento: Agua y Desagüe", l: "Caja Municipal", color: "#3b82f6", dsc: "Estimado vecino, evite el corte y recargos. Hoy vence el plazo para el pago de su recibo de agua." },
-        { d: "25", m: "MAR", h: "08:00 AM", t: "Pago de Limpieza Pública (LP)", l: "Oficina de Rentas", color: "#00A350", dsc: "Contribuye con el ornato de San Roque. Realiza el pago de tus arbitrios de limpieza pública a tiempo." },
-        { d: "30", m: "MAR", h: "09:00 AM", t: "Feria Gastronómica", l: "Plaza Central", color: "#f97316", dsc: "Exhibición de platos típicos de la zona para cerrar el mes con nuestra identidad." }
+        { 
+    d: "30", 
+    m: "MAR", 
+    h: "08:00 AM", 
+    t: "Vencimiento Total de Arbitrios", 
+    l: "Caja Municipal", 
+    color: "#3b82f6", 
+    dsc: "Último día de pago mensual. Total: S/. 15.00 (Agua S/. 5, Desagüe S/. 5, Limpieza S/. 5). Evite recargos." 
+},
+        
+        { d: "30", m: "MAR", h: "09:00 AM", t: "---", l: "--", color: "#f97316", dsc: "--." }
     ];
 
    const tasas = [
@@ -827,11 +835,38 @@
     { tipo: "TUSNE", n: "Multa: Instalación Clandestina", p: "S/. 100.00", icon: "fa-triangle-exclamation", r: "• Agua o alcantarillado sin autorización.<br>• Sujeto a corte inmediato." },
     { tipo: "TUSNE", n: "Multa: Desperdicio de Agua", p: "S/. 50.00", icon: "fa-water-ladder", r: "• Lavado de veredas, riego de calles o llenado de piscinas sin permiso." }
 ];
-    const oficinas = [
-        { nombre: "Gerencia y Secretaría", subs: [ { n: "Secretaría General", e: "Mesa de Partes", tel: "51969356686", msg: "Consulta trámite." }, { n: "Imagen Institucional", e: "Prensa y Eventos", tel: "51969356686", msg: "Consulta eventos." } ] },
-        { nombre: "Administración y Rentas", subs: [ { n: "Caja", e: "Sr. Brayan Vela", tel: "51969356686", msg: "Consulta sobre pagos." }, { n: "Contabilidad", e: "Gestión Financiera", tel: "51969356686", msg: "Asuntos contables." } ] },
-        { nombre: "Servicios a la Ciudad", subs: [ { n: "Agua (ATM)", e: "Saneamiento", tel: "51969356686", msg: "Reporte de agua." }, { n: "Limpieza Pública", e: "Gestión de Residuos", tel: "51969356686", msg: "Reporte de basura." } ] }
-    ];
+   const oficinas = [
+    { 
+        nombre: "Gerenca y Secretaría", 
+        subs: [ 
+            { n: "Secretaría General", e: "Responsable: --", tel: "51969356686", msg: "Hola, deseo realizar una consulta a Secretaría." } 
+        ] 
+    },
+    { 
+        nombre: "Administración y Rentas", 
+        subs: [ 
+            { n: "Oficina de Rentas", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Hola, consulto sobre mis tributos/arbitrios." }, 
+             { n: "Mesa de Partes", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Hola, tengo un trámite para Mesa de Partes." }
+           
+        ] 
+    },
+    { 
+        nombre: "Desarrollo Social y Humano", 
+        subs: [ 
+            { n: "ULE - SISFOH", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Hola, consulto sobre mi empadronamiento SISFOH." }, 
+            { n: "Vaso de Leche (PVL)", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Información sobre el Programa Vaso de Leche." },
+            { n: "DEMUNA", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Consulta para el área de DEMUNA." },
+            { n: "OMAPED y CIAM", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Consulta sobre programas sociales OMAPED/CIAM." }
+        ] 
+    },
+    { 
+        nombre: "Servicios a la Ciudad", 
+        subs: [ 
+            { n: "Agua (ATM)", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Reporte o consulta sobre servicio de agua." }, 
+            { n: "Limpieza Pública", e: "Responsable: Brayan Vela", tel: "51969356686", msg: "Consulta sobre recolección de residuos." } 
+        ] 
+    }
+];
 
     function actualizarReloj() {
         const ahora = new Date();
